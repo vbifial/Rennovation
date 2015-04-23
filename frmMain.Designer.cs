@@ -125,6 +125,7 @@
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.справочникиToolStripMenuItem.Text = "Справочники";
+            this.справочникиToolStripMenuItem.Click += new System.EventHandler(this.mstReferenceClick);
             // 
             // файлToolStripMenuItem
             // 

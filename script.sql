@@ -1,25 +1,25 @@
 
-Create table worktypes
+Create table if not exists worktypes 
 (
 	pworktype INTEGER PRIMARY KEY,
 	name TEXT
 );
 
-Create table workers
+Create table if not exists workers
 (
 	pworker INTEGER PRIMARY KEY,
 	name TEXT,
 	contacts TEXT
 );
 
-Create table customers
+Create table if not exists customers
 (
 	pcustomer INTEGER PRIMARY KEY,
 	name TEXT,
 	contacts TEXT
 );
 
-Create table levels
+Create table if not exists levels
 (
 	plevel INTEGER PRIMARY KEY,
 	pworktype INTEGER,
@@ -28,7 +28,7 @@ Create table levels
 	FOREIGN KEY(pworktype) REFERENCES worktypes(pworktype)
 );
 
-Create table orders
+Create table if not exists orders
 (
 	porder INTEGER PRIMARY KEY,
 	pcustomer INTEGER,
@@ -43,7 +43,7 @@ Create table orders
 	FOREIGN KEY(pcustomer) REFERENCES customers(pcustomer)
 );
 
-Create table points
+Create table if not exists points
 (
 	ppoint INTEGER PRIMARY KEY,
 	plevel INTEGER,
@@ -57,7 +57,7 @@ Create table points
 	FOREIGN KEY(plevel) REFERENCES levels(plevel)
 );
 
-Create table assignments
+Create table if not exists assignments
 (
 	passign INTEGER PRIMARY KEY,
 	pworker INTEGER,
@@ -67,7 +67,7 @@ Create table assignments
 	FOREIGN KEY(ppoint) REFERENCES points(ppoint)
 );
 
-Create table intervals
+Create table if not exists intervals
 (
 	pinterval INTEGER PRIMARY KEY,
 	passign INTEGER,
@@ -81,7 +81,7 @@ Create table intervals
 	FOREIGN KEY(passign) REFERENCES assignments(passign)
 );
 
-Create table quals
+Create table if not exists quals
 (
 	pqual INTEGER PRIMARY KEY,
 	pworktype INTEGER,
@@ -91,7 +91,7 @@ Create table quals
 	FOREIGN KEY(pworktype) REFERENCES worktypes(pworktype)
 );
 
-Create table specials
+Create table if not exists specials
 (
 	pspec INTEGER PRIMARY KEY,
 	pworker INTEGER,

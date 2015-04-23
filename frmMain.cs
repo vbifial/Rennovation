@@ -15,7 +15,25 @@ namespace Rennovation
     {
         public frmMain()
         {
+            RData.mainForm = this;
             InitializeComponent();
+            RData.referenceForm = new frmReference();
+
+            RData.checkTables();
+
+            SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+            com.CommandText = "insert into customers (name, contacts) values ('FIO1', 'cont1');" +
+                "insert into customers (name, contacts) values ('FIO2', 'cont2');" +
+                "insert into customers (name, contacts) values ('FIO3', 'cont3');" +
+                "insert into customers (name, contacts) values ('FIO4', 'cont4');";
+            //com.ExecuteNonQuery();
+            this.Text = "" + RData.getConnection().LastInsertRowId;
+
+            RData.referenceForm.ShowDialog();
+
+            
+            //RData.getConnection().LastInsertRowId;
+
 
             /*
             String dbName = @"data.db";
@@ -41,6 +59,11 @@ namespace Rennovation
 
             conn.Dispose();
              * */
+        }
+
+        public void mstReferenceClick(object sender, EventArgs e)
+        {
+            RData.referenceForm.ShowDialog();
         }
     }
 }
