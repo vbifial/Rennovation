@@ -44,9 +44,7 @@ namespace Rennovation.REntities
 
         public string[] infoLines()
         {
-            string[] ret = new string[1];
-            ret[0] = contacts;
-            return ret;
+            return RData.stringToLines(contacts);
         }
 
         public void delete()
