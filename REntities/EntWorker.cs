@@ -7,7 +7,7 @@ using System.Data.SQLite;
 
 namespace Rennovation.REntities
 {
-    class EntWorker
+    public class EntWorker
     {
         static List<EntWorker> list = new List<EntWorker>();
 

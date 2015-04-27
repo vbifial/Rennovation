@@ -7,7 +7,7 @@ using System.Data.SQLite;
 
 namespace Rennovation.REntities
 {
-    class EntSpecial
+    public class EntSpecial
     {
         static List<EntSpecial> list = new List<EntSpecial>();
 

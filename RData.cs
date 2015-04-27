@@ -55,6 +55,31 @@ namespace Rennovation
         #region код, связанный с созданием и хранением форм
         public static frmMain mainForm;
         public static frmReference referenceForm;
+        public static frmClientAdding clientAddingForm;
+
+        #endregion
+
+        #region global additional code
+
+        public static String linesToString(String[] lines)
+        {
+            StringBuilder ret = new StringBuilder();
+            if (lines.Length > 0)
+                ret.Append(lines[0]);
+            for (int i = 1; i < lines.Length; i++)
+            {
+                ret.Append('\n');
+                ret.Append(lines[i]);
+            }
+
+            return ret.ToString();
+        }
+
+        public static String[] stringToLines(String s)
+        {
+            char[] sep = {'\n'};
+            return s.Split(sep, 10000, StringSplitOptions.None);
+        }
 
         #endregion
     }

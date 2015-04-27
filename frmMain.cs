@@ -18,6 +18,7 @@ namespace Rennovation
             RData.mainForm = this;
             InitializeComponent();
             RData.referenceForm = new frmReference();
+            RData.clientAddingForm = new frmClientAdding();
 
             RData.checkTables();
 
