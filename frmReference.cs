@@ -18,28 +18,44 @@ namespace Rennovation
             InitializeComponent();
         }
 
-        List<EntCustomer> list;
-        EntCustomer[] customers;
 
         private void frmReference_Shown(object sender, EventArgs e)
         {
             tbcTabs.SelectedTab = tabClients;
-            list = EntCustomer.getAll();
-            lstCustomers.Items.Clear();
-
-            //lstCustomers.Items.AddRange(list);
-            foreach (EntCustomer cust in list)
-                lstCustomers.Items.Add(cust);
-
-            //this.Text = "" + lstCustomers.SelectedIndex;
+            renewCustomers();
         }
+
+        #region код, связанный с клиентами
+
+        //List<EntCustomer> listCustomers;
+        //EntCustomer[] customers;
 
         private void lstCustomers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            String[] lines = new String[1];
-            lines[0] = ((EntCustomer)lstCustomers.Items[lstCustomers.SelectedIndex]).info();
-            txtCustomerInfo.Lines = lines;
+            int idx = lstCustomers.SelectedIndex;
+            txtCustomerInfo.Lines = ((EntCustomer)lstCustomers.Items[idx]).infoLines();
+            
+            //String[] lines = new String[1];
+            //lines[0] = "";
+            //if (idx > -1)
+            //    lines[0] = ((EntCustomer)lstCustomers.Items[idx]).info();
+            //txtCustomerInfo.Lines = lines;
+            
             //this.Text = "" + lstCustomers.SelectedIndex;
         }
+
+        private void renewCustomers()
+        {
+            //listCustomers = ;
+            lstCustomers.Items.Clear();
+
+            foreach (EntCustomer cust in EntCustomer.getAll())
+                lstCustomers.Items.Add(cust);
+
+            //this.Text = "" + lstCustomers.SelectedIndex;
+
+        }
+
+        #endregion
     }
 }

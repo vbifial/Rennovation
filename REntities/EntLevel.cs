@@ -7,9 +7,9 @@ using System.Data.SQLite;
 
 namespace Rennovation.REntities
 {
-    class EntCustomer
+    class EntLevel
     {
-        static List<EntCustomer> list = new List<EntCustomer>();
+        static List<EntLevel> list = new List<EntLevel>();
 
         bool saved = false;
         long pcustomer = -1;
@@ -17,7 +17,7 @@ namespace Rennovation.REntities
         String name = "";
         String contacts = "";
 
-        EntCustomer(long id, String name, String contacts)
+        EntLevel(long id, String name, String contacts)
         {
             this.name = name;
             this.contacts = contacts;
@@ -25,7 +25,7 @@ namespace Rennovation.REntities
             saved = true;
         }
 
-        EntCustomer(String name, String contacts)
+        EntLevel(String name, String contacts)
         {
             this.name = name;
             this.contacts = contacts;
@@ -42,21 +42,14 @@ namespace Rennovation.REntities
             return contacts;
         }
 
-        public string[] infoLines()
-        {
-            string[] ret = new string[1];
-            ret[0] = contacts;
-            return ret;
-        }
-
-        public static List<EntCustomer> getAll()
+        public static List<EntLevel> getAll()
         {
             list.Clear();
             SQLiteCommand com = new SQLiteCommand(RData.getConnection());
             com.CommandText = "select * from customers";
             SQLiteDataReader reader = com.ExecuteReader();
             while (reader.Read()) {
-                list.Add(new EntCustomer((long)reader["pcustomer"], (String)reader["name"], 
+                list.Add(new EntLevel((long)reader["pcustomer"], (String)reader["name"], 
                     (String)reader["contacts"]));
             }
             return list;

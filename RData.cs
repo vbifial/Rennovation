@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.IO;
+using Rennovation.REntities;
 
 namespace Rennovation
 {
@@ -13,6 +14,7 @@ namespace Rennovation
         #region код, связанный с подключением к базе
         private static String dbName = @"data.db";
         private static String sqlCreateScriptName = @"script.sql";
+        private static String sqlDataScriptName = @"script-data.sql";
         private static SQLiteConnection con;
         private static String constring = "Data Source=" + 
             dbName + "; Version=3;";
@@ -29,7 +31,17 @@ namespace Rennovation
 
         public static void checkTables() 
         {
-            StreamReader reader = new StreamReader(sqlCreateScriptName);
+            runExternalScript(sqlCreateScriptName);
+        }
+
+        public static void addSampleData()
+        {
+            runExternalScript(sqlDataScriptName);
+        }
+
+        private static void runExternalScript(String filename)
+        {
+            StreamReader reader = new StreamReader(filename);
             String commandText = "";
             while (!reader.EndOfStream)
             {
