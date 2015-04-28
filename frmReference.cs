@@ -137,8 +137,14 @@ namespace Rennovation
         private void updateWorktypesLayout()
         {
             btnWorktypeAdd.Enabled = true;
-            btnWorktypeDelete.Enabled = btnWorktypeEdit.Enabled =
-                lstWorktypes.SelectedIndex != -1;
+            bool ch = lstWorktypes.SelectedIndex != -1;
+            btnWorktypeDelete.Enabled = btnWorktypeEdit.Enabled = ch;
+            if (!ch)
+            {
+                reloadLevels();
+                reloadQuals();
+            }
+
             lstWorktypes.PerformLayout();
             lstWorktypes.Refresh();
         }
@@ -146,6 +152,9 @@ namespace Rennovation
         private void lstWorktypes_SelectedIndexChanged(object sender, EventArgs e)
         {
             int idx = lstWorktypes.SelectedIndex;
+
+            reloadLevels();
+            reloadQuals();
             if (idx > -1)
             {
                 // todo ////////////////////////////////////////////////////////////////////
@@ -179,9 +188,8 @@ namespace Rennovation
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Не удаётся удалить клиента.\n" + exc.Message);
+                MessageBox.Show("Не удаётся удалить тип работы.\n" + exc.Message);
             }
-
         }
 
         private void btnWorktypeEdit_Click(object sender, EventArgs e)
@@ -275,6 +283,110 @@ namespace Rennovation
 
         #endregion
 
+        #region код, связанный с квалификациями
 
+        void addQualToGrid(EntQual qual)
+        {
+            int rid = dgrQuals.Rows.Add();
+            dgrQuals.Rows[rid].Cells[colQualName.Index].Value = qual.name;
+            dgrQuals.Rows[rid].Cells[colQualLValue.Index].Value = qual.lvalue;
+            dgrQuals.Rows[rid].Cells[colQualValue.Index].Value = qual.value;
+            dgrQuals.Rows[rid].Cells[colQualObject.Index].Value = qual;
+        }
+
+        void reloadQuals()
+        {
+            dgrQuals.Rows.Clear();
+            //lstWorktypes.Items.Clear();
+            if (lstWorktypes.SelectedIndex != -1) 
+            {
+                EntWorktype wtype = (EntWorktype)(lstWorktypes.SelectedItem);
+                foreach (EntQual qual in EntQual.getWithWorktype(wtype.pworktype))
+                    addQualToGrid(qual);
+                //foreach (EntQual qual in EntQual.getAll())
+                //    addQualToGrid(qual);
+            }
+            updateQualsLayout();
+        }
+
+        void updateQualsLayout()
+        {
+            bool ch = lstWorktypes.SelectedIndex != -1;
+            bool gr = dgrQuals.SelectedRows.Count > 0;
+            dgrQuals.Enabled = ch;
+            btnQualAdd.Enabled = ch;
+            btnQualDelete.Enabled = btnQualEdit.Enabled = ch && gr;
+        }
+
+        private void dgrQuals_SelectionChanged(object sender, EventArgs e)
+        {
+
+            updateQualsLayout();
+        }
+
+        private void btnQualAdd_Click(object sender, EventArgs e)
+        {
+            frmQualAdding frmNew = RData.qualAddingForm;
+            frmNew.adding = true;
+            frmNew.pworktype = ((EntWorktype)(lstWorktypes.SelectedItem)).pworktype;
+            frmNew.init();
+            frmNew.ShowDialog();
+            if (frmNew.success)
+            {
+                addQualToGrid(frmNew.qual);
+                updateQualsLayout();
+            }
+        }
+
+        private void btnQualEdit_Click(object sender, EventArgs e)
+        {
+            frmQualAdding frmEdit = RData.qualAddingForm;
+            frmEdit.adding = false;
+            int rid = dgrQuals.SelectedRows[0].Index;
+            frmEdit.qual = (EntQual)(dgrQuals.Rows[rid].Cells[colQualObject.Index].Value);
+            frmEdit.init();
+            frmEdit.ShowDialog();
+            if (frmEdit.success)
+            {
+                reloadQuals();
+            }
+        }
+
+        private void btnQualDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int rid = dgrQuals.SelectedRows[0].Index;
+                EntQual qual = (EntQual)(dgrQuals.Rows[rid].Cells[colQualObject.Index].Value);
+                qual.delete();
+                dgrQuals.Rows.RemoveAt(rid);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Не удаётся удалить квалификацию.\n" + exc.Message);
+            }
+        }
+
+        #endregion
+
+        #region 
+
+        void reloadLevels()
+        {
+
+        }
+
+        void updateLevelsLayout()
+        {
+
+        }
+
+        #endregion
+
+
+        private void dgrSpecials_SelectionChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

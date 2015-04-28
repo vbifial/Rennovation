@@ -12,7 +12,7 @@ namespace Rennovation.REntities
         static List<EntWorktype> list = new List<EntWorktype>();
 
         bool saved = false;
-        long pworktype = -1;
+        public long pworktype = -1;
 
         public String name = "";
 

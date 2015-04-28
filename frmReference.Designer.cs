@@ -142,6 +142,7 @@
             this.dgrSpecials.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgrSpecials.Size = new System.Drawing.Size(309, 176);
             this.dgrSpecials.TabIndex = 45;
+            this.dgrSpecials.SelectionChanged += new System.EventHandler(this.dgrSpecials_SelectionChanged);
             // 
             // colSpecialObj
             // 
@@ -323,6 +324,7 @@
             this.dgrQuals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgrQuals.Size = new System.Drawing.Size(309, 147);
             this.dgrQuals.TabIndex = 35;
+            this.dgrQuals.SelectionChanged += new System.EventHandler(this.dgrQuals_SelectionChanged);
             // 
             // colQualName
             // 
@@ -400,6 +402,7 @@
             this.btnQualEdit.TabIndex = 33;
             this.btnQualEdit.Text = "Редактировать";
             this.btnQualEdit.UseVisualStyleBackColor = true;
+            this.btnQualEdit.Click += new System.EventHandler(this.btnQualEdit_Click);
             // 
             // btnLevelEdit
             // 
@@ -429,6 +432,7 @@
             this.btnQualDelete.TabIndex = 32;
             this.btnQualDelete.Text = "Удалить";
             this.btnQualDelete.UseVisualStyleBackColor = true;
+            this.btnQualDelete.Click += new System.EventHandler(this.btnQualDelete_Click);
             // 
             // btnLevelDelete
             // 
@@ -458,6 +462,7 @@
             this.btnQualAdd.TabIndex = 31;
             this.btnQualAdd.Text = "Добавить";
             this.btnQualAdd.UseVisualStyleBackColor = true;
+            this.btnQualAdd.Click += new System.EventHandler(this.btnQualAdd_Click);
             // 
             // btnLevelAdd
             // 

@@ -50,14 +50,23 @@ namespace Rennovation
             SQLiteCommand com = new SQLiteCommand(commandText, getConnection());
             com.ExecuteNonQuery();
         }
+        
+        public static void enableForeignKeysSupport()
+        {
+            String commandText = "PRAGMA foreign_keys = ON;";
+            SQLiteCommand com = new SQLiteCommand(commandText, getConnection());
+            com.ExecuteNonQuery();
+        }
         #endregion
 
         #region код, связанный с созданием и хранением форм
+        
         public static frmMain mainForm;
         public static frmReference referenceForm;
         public static frmCustomerAdding clientAddingForm;
         public static frmWorktypeAdding worktypeAddingForm;
         public static frmWorkerAdding workerAddingForm;
+        public static frmQualAdding qualAddingForm;
 
         #endregion
 

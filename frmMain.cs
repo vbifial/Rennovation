@@ -21,8 +21,10 @@ namespace Rennovation
             RData.clientAddingForm = new frmCustomerAdding();
             RData.worktypeAddingForm = new frmWorktypeAdding();
             RData.workerAddingForm = new frmWorkerAdding();
+            RData.qualAddingForm = new frmQualAdding();
 
             RData.checkTables();
+            RData.enableForeignKeysSupport();
 
             RData.referenceForm.ShowDialog();
 
