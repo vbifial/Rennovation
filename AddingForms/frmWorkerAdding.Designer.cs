@@ -1,6 +1,6 @@
 ﻿namespace Rennovation
 {
-    partial class frmClientAdding
+    partial class frmWorkerAdding
     {
         /// <summary>
         /// Required designer variable.
@@ -39,13 +39,13 @@
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(347, 185);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 15;
+            this.btnCancel.TabIndex = 21;
             this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -53,10 +53,9 @@
             this.btnSave.Location = new System.Drawing.Point(266, 185);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 14;
+            this.btnSave.TabIndex = 20;
             this.btnSave.Text = "Сохранить";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // txtContacts
             // 
@@ -67,7 +66,7 @@
             this.txtContacts.Multiline = true;
             this.txtContacts.Name = "txtContacts";
             this.txtContacts.Size = new System.Drawing.Size(303, 141);
-            this.txtContacts.TabIndex = 12;
+            this.txtContacts.TabIndex = 19;
             // 
             // txtName
             // 
@@ -76,7 +75,7 @@
             this.txtName.Location = new System.Drawing.Point(119, 12);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(303, 20);
-            this.txtName.TabIndex = 11;
+            this.txtName.TabIndex = 18;
             // 
             // lblContacts
             // 
@@ -84,7 +83,7 @@
             this.lblContacts.Location = new System.Drawing.Point(12, 41);
             this.lblContacts.Name = "lblContacts";
             this.lblContacts.Size = new System.Drawing.Size(56, 13);
-            this.lblContacts.TabIndex = 9;
+            this.lblContacts.TabIndex = 17;
             this.lblContacts.Text = "Контакты";
             // 
             // lblName
@@ -93,13 +92,14 @@
             this.lblName.Location = new System.Drawing.Point(12, 15);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(34, 13);
-            this.lblName.TabIndex = 8;
+            this.lblName.TabIndex = 16;
             this.lblName.Text = "ФИО";
             // 
-            // frmClientAdding
+            // frmWorkerAdding
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(434, 211);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
@@ -107,8 +107,8 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblContacts);
             this.Controls.Add(this.lblName);
-            this.Name = "frmClientAdding";
-            this.Text = "Редактирование клиента";
+            this.Name = "frmWorkerAdding";
+            this.Text = "frmWorkerAdding";
             this.ResumeLayout(false);
             this.PerformLayout();
 

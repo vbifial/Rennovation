@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.tbcTabs = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabWorkers = new System.Windows.Forms.TabPage();
             this.dgrSpecials = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecialObj = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecialWorktype = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecialQual = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSpecialEdit = new System.Windows.Forms.Button();
             this.btnSpecialDelete = new System.Windows.Forms.Button();
             this.btnSpecialAdd = new System.Windows.Forms.Button();
@@ -45,7 +45,7 @@
             this.btnWorkerAdd = new System.Windows.Forms.Button();
             this.lblWorkers = new System.Windows.Forms.Label();
             this.lstWorkers = new System.Windows.Forms.ListBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabWorktypes = new System.Windows.Forms.TabPage();
             this.dgrQuals = new System.Windows.Forms.DataGridView();
             this.colQualName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colQualObject = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,16 +70,16 @@
             this.lstWorktypes = new System.Windows.Forms.ListBox();
             this.tabClients = new System.Windows.Forms.TabPage();
             this.txtCustomerInfo = new System.Windows.Forms.TextBox();
-            this.btnClientEdit = new System.Windows.Forms.Button();
-            this.btnClientDelete = new System.Windows.Forms.Button();
-            this.btnClientAdd = new System.Windows.Forms.Button();
+            this.btnCustomerEdit = new System.Windows.Forms.Button();
+            this.btnCustomerDelete = new System.Windows.Forms.Button();
+            this.btnCustomerAdd = new System.Windows.Forms.Button();
             this.lblCustomerInfo = new System.Windows.Forms.Label();
             this.lblCustomers = new System.Windows.Forms.Label();
             this.lstCustomers = new System.Windows.Forms.ListBox();
             this.tbcTabs.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabWorkers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgrSpecials)).BeginInit();
-            this.tabPage2.SuspendLayout();
+            this.tabWorktypes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgrQuals)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgrLevels)).BeginInit();
             this.tabClients.SuspendLayout();
@@ -90,8 +90,8 @@
             this.tbcTabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbcTabs.Controls.Add(this.tabPage1);
-            this.tbcTabs.Controls.Add(this.tabPage2);
+            this.tbcTabs.Controls.Add(this.tabWorkers);
+            this.tbcTabs.Controls.Add(this.tabWorktypes);
             this.tbcTabs.Controls.Add(this.tabClients);
             this.tbcTabs.Location = new System.Drawing.Point(12, 14);
             this.tbcTabs.Name = "tbcTabs";
@@ -99,27 +99,27 @@
             this.tbcTabs.Size = new System.Drawing.Size(616, 385);
             this.tbcTabs.TabIndex = 1;
             // 
-            // tabPage1
+            // tabWorkers
             // 
-            this.tabPage1.Controls.Add(this.dgrSpecials);
-            this.tabPage1.Controls.Add(this.btnSpecialEdit);
-            this.tabPage1.Controls.Add(this.btnSpecialDelete);
-            this.tabPage1.Controls.Add(this.btnSpecialAdd);
-            this.tabPage1.Controls.Add(this.lblSpecials);
-            this.tabPage1.Controls.Add(this.txtWorkerInfo);
-            this.tabPage1.Controls.Add(this.lblWorkerInfo);
-            this.tabPage1.Controls.Add(this.btnWorkerEdit);
-            this.tabPage1.Controls.Add(this.btnWorkerDelete);
-            this.tabPage1.Controls.Add(this.btnWorkerAdd);
-            this.tabPage1.Controls.Add(this.lblWorkers);
-            this.tabPage1.Controls.Add(this.lstWorkers);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(608, 359);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Работники";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabWorkers.Controls.Add(this.dgrSpecials);
+            this.tabWorkers.Controls.Add(this.btnSpecialEdit);
+            this.tabWorkers.Controls.Add(this.btnSpecialDelete);
+            this.tabWorkers.Controls.Add(this.btnSpecialAdd);
+            this.tabWorkers.Controls.Add(this.lblSpecials);
+            this.tabWorkers.Controls.Add(this.txtWorkerInfo);
+            this.tabWorkers.Controls.Add(this.lblWorkerInfo);
+            this.tabWorkers.Controls.Add(this.btnWorkerEdit);
+            this.tabWorkers.Controls.Add(this.btnWorkerDelete);
+            this.tabWorkers.Controls.Add(this.btnWorkerAdd);
+            this.tabWorkers.Controls.Add(this.lblWorkers);
+            this.tabWorkers.Controls.Add(this.lstWorkers);
+            this.tabWorkers.Location = new System.Drawing.Point(4, 22);
+            this.tabWorkers.Name = "tabWorkers";
+            this.tabWorkers.Padding = new System.Windows.Forms.Padding(3);
+            this.tabWorkers.Size = new System.Drawing.Size(608, 359);
+            this.tabWorkers.TabIndex = 0;
+            this.tabWorkers.Text = "Работники";
+            this.tabWorkers.UseVisualStyleBackColor = true;
             // 
             // dgrSpecials
             // 
@@ -130,9 +130,9 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dgrSpecials.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgrSpecials.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3});
+            this.colSpecialObj,
+            this.colSpecialWorktype,
+            this.colSpecialQual});
             this.dgrSpecials.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgrSpecials.Location = new System.Drawing.Point(186, 177);
             this.dgrSpecials.MultiSelect = false;
@@ -143,26 +143,27 @@
             this.dgrSpecials.Size = new System.Drawing.Size(309, 176);
             this.dgrSpecials.TabIndex = 45;
             // 
-            // dataGridViewTextBoxColumn1
+            // colSpecialObj
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "Название";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Width = 220;
+            this.colSpecialObj.HeaderText = "Column3";
+            this.colSpecialObj.Name = "colSpecialObj";
+            this.colSpecialObj.ReadOnly = true;
+            this.colSpecialObj.Visible = false;
+            this.colSpecialObj.Width = 130;
             // 
-            // dataGridViewTextBoxColumn2
+            // colSpecialWorktype
             // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "Column3";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Visible = false;
+            this.colSpecialWorktype.HeaderText = "Тип работы";
+            this.colSpecialWorktype.Name = "colSpecialWorktype";
+            this.colSpecialWorktype.ReadOnly = true;
+            this.colSpecialWorktype.Width = 130;
             // 
-            // dataGridViewTextBoxColumn3
+            // colSpecialQual
             // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "Показатель";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 70;
+            this.colSpecialQual.HeaderText = "Название квалификации";
+            this.colSpecialQual.Name = "colSpecialQual";
+            this.colSpecialQual.ReadOnly = true;
+            this.colSpecialQual.Width = 170;
             // 
             // btnSpecialEdit
             // 
@@ -197,15 +198,16 @@
             this.lblSpecials.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblSpecials.Location = new System.Drawing.Point(183, 161);
             this.lblSpecials.Name = "lblSpecials";
-            this.lblSpecials.Size = new System.Drawing.Size(109, 13);
+            this.lblSpecials.Size = new System.Drawing.Size(151, 13);
             this.lblSpecials.TabIndex = 41;
-            this.lblSpecials.Text = "Уровни качества";
+            this.lblSpecials.Text = "Записи о квалификации";
             // 
             // txtWorkerInfo
             // 
             this.txtWorkerInfo.Location = new System.Drawing.Point(186, 38);
             this.txtWorkerInfo.Multiline = true;
             this.txtWorkerInfo.Name = "txtWorkerInfo";
+            this.txtWorkerInfo.ReadOnly = true;
             this.txtWorkerInfo.Size = new System.Drawing.Size(416, 120);
             this.txtWorkerInfo.TabIndex = 40;
             // 
@@ -272,31 +274,32 @@
             this.lstWorkers.Name = "lstWorkers";
             this.lstWorkers.Size = new System.Drawing.Size(174, 257);
             this.lstWorkers.TabIndex = 34;
+            this.lstWorkers.SelectedIndexChanged += new System.EventHandler(this.lstWorkers_SelectedIndexChanged);
             // 
-            // tabPage2
+            // tabWorktypes
             // 
-            this.tabPage2.Controls.Add(this.dgrQuals);
-            this.tabPage2.Controls.Add(this.dgrLevels);
-            this.tabPage2.Controls.Add(this.btnQualEdit);
-            this.tabPage2.Controls.Add(this.btnLevelEdit);
-            this.tabPage2.Controls.Add(this.btnWorktypeEdit);
-            this.tabPage2.Controls.Add(this.btnQualDelete);
-            this.tabPage2.Controls.Add(this.btnLevelDelete);
-            this.tabPage2.Controls.Add(this.btnWorktypeDelete);
-            this.tabPage2.Controls.Add(this.btnQualAdd);
-            this.tabPage2.Controls.Add(this.btnLevelAdd);
-            this.tabPage2.Controls.Add(this.btnWorktypeAdd);
-            this.tabPage2.Controls.Add(this.lblQuals);
-            this.tabPage2.Controls.Add(this.lblLevels);
-            this.tabPage2.Controls.Add(this.lblWorktypes);
-            this.tabPage2.Controls.Add(this.lstWorktypes);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(608, 359);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Работы";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabWorktypes.Controls.Add(this.dgrQuals);
+            this.tabWorktypes.Controls.Add(this.dgrLevels);
+            this.tabWorktypes.Controls.Add(this.btnQualEdit);
+            this.tabWorktypes.Controls.Add(this.btnLevelEdit);
+            this.tabWorktypes.Controls.Add(this.btnWorktypeEdit);
+            this.tabWorktypes.Controls.Add(this.btnQualDelete);
+            this.tabWorktypes.Controls.Add(this.btnLevelDelete);
+            this.tabWorktypes.Controls.Add(this.btnWorktypeDelete);
+            this.tabWorktypes.Controls.Add(this.btnQualAdd);
+            this.tabWorktypes.Controls.Add(this.btnLevelAdd);
+            this.tabWorktypes.Controls.Add(this.btnWorktypeAdd);
+            this.tabWorktypes.Controls.Add(this.lblQuals);
+            this.tabWorktypes.Controls.Add(this.lblLevels);
+            this.tabWorktypes.Controls.Add(this.lblWorktypes);
+            this.tabWorktypes.Controls.Add(this.lstWorktypes);
+            this.tabWorktypes.Location = new System.Drawing.Point(4, 22);
+            this.tabWorktypes.Name = "tabWorktypes";
+            this.tabWorktypes.Padding = new System.Windows.Forms.Padding(3);
+            this.tabWorktypes.Size = new System.Drawing.Size(608, 359);
+            this.tabWorktypes.TabIndex = 1;
+            this.tabWorktypes.Text = "Работы";
+            this.tabWorktypes.UseVisualStyleBackColor = true;
             // 
             // dgrQuals
             // 
@@ -416,6 +419,7 @@
             this.btnWorktypeEdit.TabIndex = 33;
             this.btnWorktypeEdit.Text = "Редактировать";
             this.btnWorktypeEdit.UseVisualStyleBackColor = true;
+            this.btnWorktypeEdit.Click += new System.EventHandler(this.btnWorktypeEdit_Click);
             // 
             // btnQualDelete
             // 
@@ -444,6 +448,7 @@
             this.btnWorktypeDelete.TabIndex = 32;
             this.btnWorktypeDelete.Text = "Удалить";
             this.btnWorktypeDelete.UseVisualStyleBackColor = true;
+            this.btnWorktypeDelete.Click += new System.EventHandler(this.btnWorktypeDelete_Click);
             // 
             // btnQualAdd
             // 
@@ -472,6 +477,7 @@
             this.btnWorktypeAdd.TabIndex = 31;
             this.btnWorktypeAdd.Text = "Добавить";
             this.btnWorktypeAdd.UseVisualStyleBackColor = true;
+            this.btnWorktypeAdd.Click += new System.EventHandler(this.btnWorktypeAdd_Click);
             // 
             // lblQuals
             // 
@@ -513,13 +519,14 @@
             this.lstWorktypes.Name = "lstWorktypes";
             this.lstWorktypes.Size = new System.Drawing.Size(174, 257);
             this.lstWorktypes.TabIndex = 28;
+            this.lstWorktypes.SelectedIndexChanged += new System.EventHandler(this.lstWorktypes_SelectedIndexChanged);
             // 
             // tabClients
             // 
             this.tabClients.Controls.Add(this.txtCustomerInfo);
-            this.tabClients.Controls.Add(this.btnClientEdit);
-            this.tabClients.Controls.Add(this.btnClientDelete);
-            this.tabClients.Controls.Add(this.btnClientAdd);
+            this.tabClients.Controls.Add(this.btnCustomerEdit);
+            this.tabClients.Controls.Add(this.btnCustomerDelete);
+            this.tabClients.Controls.Add(this.btnCustomerAdd);
             this.tabClients.Controls.Add(this.lblCustomerInfo);
             this.tabClients.Controls.Add(this.lblCustomers);
             this.tabClients.Controls.Add(this.lstCustomers);
@@ -538,41 +545,42 @@
             this.txtCustomerInfo.Location = new System.Drawing.Point(186, 38);
             this.txtCustomerInfo.Multiline = true;
             this.txtCustomerInfo.Name = "txtCustomerInfo";
+            this.txtCustomerInfo.ReadOnly = true;
             this.txtCustomerInfo.Size = new System.Drawing.Size(416, 315);
             this.txtCustomerInfo.TabIndex = 27;
             // 
-            // btnClientEdit
+            // btnCustomerEdit
             // 
-            this.btnClientEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClientEdit.Location = new System.Drawing.Point(79, 330);
-            this.btnClientEdit.Name = "btnClientEdit";
-            this.btnClientEdit.Size = new System.Drawing.Size(101, 23);
-            this.btnClientEdit.TabIndex = 26;
-            this.btnClientEdit.Text = "Редактировать";
-            this.btnClientEdit.UseVisualStyleBackColor = true;
-            this.btnClientEdit.Click += new System.EventHandler(this.btnClientEdit_Click);
+            this.btnCustomerEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCustomerEdit.Location = new System.Drawing.Point(79, 330);
+            this.btnCustomerEdit.Name = "btnCustomerEdit";
+            this.btnCustomerEdit.Size = new System.Drawing.Size(101, 23);
+            this.btnCustomerEdit.TabIndex = 26;
+            this.btnCustomerEdit.Text = "Редактировать";
+            this.btnCustomerEdit.UseVisualStyleBackColor = true;
+            this.btnCustomerEdit.Click += new System.EventHandler(this.btnClientEdit_Click);
             // 
-            // btnClientDelete
+            // btnCustomerDelete
             // 
-            this.btnClientDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClientDelete.Location = new System.Drawing.Point(6, 330);
-            this.btnClientDelete.Name = "btnClientDelete";
-            this.btnClientDelete.Size = new System.Drawing.Size(67, 23);
-            this.btnClientDelete.TabIndex = 25;
-            this.btnClientDelete.Text = "Удалить";
-            this.btnClientDelete.UseVisualStyleBackColor = true;
-            this.btnClientDelete.Click += new System.EventHandler(this.btnClientDelete_Click);
+            this.btnCustomerDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCustomerDelete.Location = new System.Drawing.Point(6, 330);
+            this.btnCustomerDelete.Name = "btnCustomerDelete";
+            this.btnCustomerDelete.Size = new System.Drawing.Size(67, 23);
+            this.btnCustomerDelete.TabIndex = 25;
+            this.btnCustomerDelete.Text = "Удалить";
+            this.btnCustomerDelete.UseVisualStyleBackColor = true;
+            this.btnCustomerDelete.Click += new System.EventHandler(this.btnClientDelete_Click);
             // 
-            // btnClientAdd
+            // btnCustomerAdd
             // 
-            this.btnClientAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnClientAdd.Location = new System.Drawing.Point(6, 301);
-            this.btnClientAdd.Name = "btnClientAdd";
-            this.btnClientAdd.Size = new System.Drawing.Size(174, 23);
-            this.btnClientAdd.TabIndex = 24;
-            this.btnClientAdd.Text = "Добавить";
-            this.btnClientAdd.UseVisualStyleBackColor = true;
-            this.btnClientAdd.Click += new System.EventHandler(this.btnClientAdd_Click);
+            this.btnCustomerAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnCustomerAdd.Location = new System.Drawing.Point(6, 301);
+            this.btnCustomerAdd.Name = "btnCustomerAdd";
+            this.btnCustomerAdd.Size = new System.Drawing.Size(174, 23);
+            this.btnCustomerAdd.TabIndex = 24;
+            this.btnCustomerAdd.Text = "Добавить";
+            this.btnCustomerAdd.UseVisualStyleBackColor = true;
+            this.btnCustomerAdd.Click += new System.EventHandler(this.btnClientAdd_Click);
             // 
             // lblCustomerInfo
             // 
@@ -618,11 +626,11 @@
             this.Text = "Справочники";
             this.Shown += new System.EventHandler(this.frmReference_Shown);
             this.tbcTabs.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tabWorkers.ResumeLayout(false);
+            this.tabWorkers.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgrSpecials)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tabWorktypes.ResumeLayout(false);
+            this.tabWorktypes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgrQuals)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgrLevels)).EndInit();
             this.tabClients.ResumeLayout(false);
@@ -634,12 +642,12 @@
         #endregion
 
         private System.Windows.Forms.TabControl tbcTabs;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabWorkers;
+        private System.Windows.Forms.TabPage tabWorktypes;
         private System.Windows.Forms.TabPage tabClients;
-        private System.Windows.Forms.Button btnClientEdit;
-        private System.Windows.Forms.Button btnClientDelete;
-        private System.Windows.Forms.Button btnClientAdd;
+        private System.Windows.Forms.Button btnCustomerEdit;
+        private System.Windows.Forms.Button btnCustomerDelete;
+        private System.Windows.Forms.Button btnCustomerAdd;
         private System.Windows.Forms.Label lblCustomerInfo;
         private System.Windows.Forms.Label lblCustomers;
         private System.Windows.Forms.ListBox lstCustomers;
@@ -674,12 +682,12 @@
         private System.Windows.Forms.Label lblWorkers;
         private System.Windows.Forms.ListBox lstWorkers;
         private System.Windows.Forms.DataGridView dgrSpecials;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.Button btnSpecialEdit;
         private System.Windows.Forms.Button btnSpecialDelete;
         private System.Windows.Forms.Button btnSpecialAdd;
         private System.Windows.Forms.Label lblSpecials;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialObj;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialWorktype;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialQual;
     }
 }

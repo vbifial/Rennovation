@@ -55,7 +55,9 @@ namespace Rennovation
         #region код, связанный с созданием и хранением форм
         public static frmMain mainForm;
         public static frmReference referenceForm;
-        public static frmClientAdding clientAddingForm;
+        public static frmCustomerAdding clientAddingForm;
+        public static frmWorktypeAdding worktypeAddingForm;
+        public static frmWorkerAdding workerAddingForm;
 
         #endregion
 

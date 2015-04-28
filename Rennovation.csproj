@@ -49,17 +49,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddingForms\frmClientAdding.cs">
+    <Compile Include="AddingForms\frmCustomerAdding.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddingForms\frmClientAdding.Designer.cs">
-      <DependentUpon>frmClientAdding.cs</DependentUpon>
+    <Compile Include="AddingForms\frmCustomerAdding.Designer.cs">
+      <DependentUpon>frmCustomerAdding.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddingForms\frmWorktypeAdding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddingForms\frmWorktypeAdding.Designer.cs">
+      <DependentUpon>frmWorktypeAdding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddingForms\frmWorkerAdding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddingForms\frmWorkerAdding.Designer.cs">
+      <DependentUpon>frmWorkerAdding.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,8 +88,14 @@
     <Compile Include="frmReference.Designer.cs">
       <DependentUpon>frmReference.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AddingForms\frmClientAdding.resx">
-      <DependentUpon>frmClientAdding.cs</DependentUpon>
+    <EmbeddedResource Include="AddingForms\frmCustomerAdding.resx">
+      <DependentUpon>frmCustomerAdding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddingForms\frmWorkerAdding.resx">
+      <DependentUpon>frmWorkerAdding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddingForms\frmWorktypeAdding.resx">
+      <DependentUpon>frmWorktypeAdding.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>

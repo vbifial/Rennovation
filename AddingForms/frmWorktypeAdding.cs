@@ -11,30 +11,28 @@ using Rennovation.REntities;
 
 namespace Rennovation
 {
-    public partial class frmClientAdding : Form
+    public partial class frmWorktypeAdding : Form
     {
-        public frmClientAdding()
+        public frmWorktypeAdding()
         {
             InitializeComponent();
         }
 
         public bool adding = true;
-        public EntCustomer customer = null;
+        public EntWorktype worktype = null;
         public bool success = false;
 
         public void init()
         {
             if (adding)
             {
-                this.Text = "Добавление клиента";
+                this.Text = "Добавление типа работы";
                 txtName.Text = null;
-                txtContacts.Text = null;
             }
             else
             {
-                this.Text = "Редактирование клиента";
-                txtName.Text = customer.name;
-                txtContacts.Lines = RData.stringToLines(customer.contacts);
+                this.Text = "Редактирование типа работы";
+                txtName.Text = worktype.name;
             }
             success = false;
         }
@@ -42,14 +40,13 @@ namespace Rennovation
         private void btnSave_Click(object sender, EventArgs e)
         {
             String name = txtName.Text;
-            String cont = RData.linesToString(txtContacts.Lines);
-            if (EntCustomer.check(name, cont))
+            if (EntWorktype.check(name))
                 if (adding)
                 {
                     try
                     {
-                        customer = new EntCustomer(name, cont);
-                        customer.save();
+                        worktype = new EntWorktype(name);
+                        worktype.save();
                         success = true;
                         this.Hide();
                     }
@@ -62,13 +59,13 @@ namespace Rennovation
                 {
                     try
                     {
-                        customer.name = name;
-                        customer.contacts = cont;
-                        customer.save();
+                        worktype.name = name;
+                        worktype.save();
                         success = true;
                         this.Hide();
                     }
-                    catch (Exception exc) {
+                    catch (Exception exc)
+                    {
                         MessageBox.Show("Error:\n" + exc.Message);
                     }
                 }

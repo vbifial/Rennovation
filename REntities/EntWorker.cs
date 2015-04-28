@@ -12,20 +12,20 @@ namespace Rennovation.REntities
         static List<EntWorker> list = new List<EntWorker>();
 
         bool saved = false;
-        long pcustomer = -1;
+        long pworker = -1;
 
-        String name = "";
-        String contacts = "";
+        public String name = "";
+        public String contacts = "";
 
         EntWorker(long id, String name, String contacts)
         {
             this.name = name;
             this.contacts = contacts;
-            this.pcustomer = id;
+            this.pworker = id;
             saved = true;
         }
 
-        EntWorker(String name, String contacts)
+        public EntWorker(String name, String contacts)
         {
             this.name = name;
             this.contacts = contacts;
@@ -42,14 +42,63 @@ namespace Rennovation.REntities
             return contacts;
         }
 
+        public string[] infoLines()
+        {
+            return RData.stringToLines(contacts);
+        }
+
+        public void delete()
+        {
+            if (saved)
+            {
+                SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+                com.CommandText = "delete from workers where pworker = @id";
+                com.Parameters.Add(new SQLiteParameter("@id", this.pworker));
+                com.ExecuteNonQuery();
+            }
+        }
+
+        public void save()
+        {
+            SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+            if (saved)
+            {
+                com.CommandText = "update workers set name = @name, contacts = @cont " +
+                    "where pworker = @id";
+                com.Parameters.Add(new SQLiteParameter("@name", name));
+                com.Parameters.Add(new SQLiteParameter("@cont", contacts));
+                com.Parameters.Add(new SQLiteParameter("@id", pworker));
+                com.ExecuteNonQuery();
+            }
+            else
+            {
+                com.CommandText = "insert into workers (name, contacts) values (@name, @cont)";
+                com.Parameters.Add(new SQLiteParameter("@name", name));
+                com.Parameters.Add(new SQLiteParameter("@cont", contacts));
+                com.ExecuteNonQuery();
+                pworker = RData.getConnection().LastInsertRowId;
+                saved = true;
+            }
+        }
+
+        public static bool check(String name, String contacts)
+        {
+            if (name.Equals(""))
+            {
+                System.Windows.Forms.MessageBox.Show(@"Поле ""ФИО"" не может быть пустым.");
+                return false;
+            }
+            return true;
+        }
+
         public static List<EntWorker> getAll()
         {
             list.Clear();
             SQLiteCommand com = new SQLiteCommand(RData.getConnection());
-            com.CommandText = "select * from customers";
+            com.CommandText = "select * from workers";
             SQLiteDataReader reader = com.ExecuteReader();
             while (reader.Read()) {
-                list.Add(new EntWorker((long)reader["pcustomer"], (String)reader["name"], 
+                list.Add(new EntWorker((long)reader["pworker"], (String)reader["name"], 
                     (String)reader["contacts"]));
             }
             return list;

@@ -12,23 +12,20 @@ namespace Rennovation.REntities
         static List<EntWorktype> list = new List<EntWorktype>();
 
         bool saved = false;
-        long pcustomer = -1;
+        long pworktype = -1;
 
-        String name = "";
-        String contacts = "";
+        public String name = "";
 
-        EntWorktype(long id, String name, String contacts)
+        EntWorktype(long id, String name)
         {
             this.name = name;
-            this.contacts = contacts;
-            this.pcustomer = id;
+            this.pworktype = id;
             saved = true;
         }
 
-        EntWorktype(String name, String contacts)
+        public EntWorktype(String name)
         {
             this.name = name;
-            this.contacts = contacts;
             saved = false;
         }
 
@@ -39,18 +36,59 @@ namespace Rennovation.REntities
 
         public string info()
         {
-            return contacts;
+            return name;
+        }
+
+        public void delete()
+        {
+            if (saved)
+            {
+                SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+                com.CommandText = "delete from worktypes where pworktype = @id";
+                com.Parameters.Add(new SQLiteParameter("@id", this.pworktype));
+                com.ExecuteNonQuery();
+            }
+        }
+
+        public void save()
+        {
+            SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+            if (saved)
+            {
+                com.CommandText = "update worktypes set name = @name " +
+                    "where pworktype = @id";
+                com.Parameters.Add(new SQLiteParameter("@name", name));
+                com.Parameters.Add(new SQLiteParameter("@id", pworktype));
+                com.ExecuteNonQuery();
+            }
+            else
+            {
+                com.CommandText = "insert into worktypes (name) values (@name)";
+                com.Parameters.Add(new SQLiteParameter("@name", name));
+                com.ExecuteNonQuery();
+                pworktype = RData.getConnection().LastInsertRowId;
+                saved = true;
+            }
+        }
+
+        public static bool check(String name)
+        {
+            if (name.Equals(""))
+            {
+                System.Windows.Forms.MessageBox.Show(@"Поле ""Название"" не может быть пустым.");
+                return false;
+            }
+            return true;
         }
 
         public static List<EntWorktype> getAll()
         {
             list.Clear();
             SQLiteCommand com = new SQLiteCommand(RData.getConnection());
-            com.CommandText = "select * from customers";
+            com.CommandText = "select * from worktypes";
             SQLiteDataReader reader = com.ExecuteReader();
             while (reader.Read()) {
-                list.Add(new EntWorktype((long)reader["pcustomer"], (String)reader["name"], 
-                    (String)reader["contacts"]));
+                list.Add(new EntWorktype((long)reader["pworktype"], (String)reader["name"]));
             }
             return list;
         }

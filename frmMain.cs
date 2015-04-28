@@ -18,17 +18,11 @@ namespace Rennovation
             RData.mainForm = this;
             InitializeComponent();
             RData.referenceForm = new frmReference();
-            RData.clientAddingForm = new frmClientAdding();
+            RData.clientAddingForm = new frmCustomerAdding();
+            RData.worktypeAddingForm = new frmWorktypeAdding();
+            RData.workerAddingForm = new frmWorkerAdding();
 
             RData.checkTables();
-
-            SQLiteCommand com = new SQLiteCommand(RData.getConnection());
-            com.CommandText = "insert into customers (name, contacts) values ('FIO1', 'cont1');" +
-                "insert into customers (name, contacts) values ('FIO2', 'cont2');" +
-                "insert into customers (name, contacts) values ('FIO3', 'cont3');" +
-                "insert into customers (name, contacts) values ('FIO4', 'cont4');";
-            //com.ExecuteNonQuery();
-            this.Text = "" + RData.getConnection().LastInsertRowId;
 
             RData.referenceForm.ShowDialog();
 
@@ -36,30 +30,6 @@ namespace Rennovation
             //RData.getConnection().LastInsertRowId;
 
 
-            /*
-            String dbName = @"data.db";
-            //SQLiteConnection.CreateFile(dbName);
-            SQLiteConnection conn = new SQLiteConnection(
-                "Data Source=" + dbName + "; Version=3;");
-            conn.Open();
-
-            SQLiteCommand com = new SQLiteCommand();
-            com.Connection = conn;
-
-            String text = "";
-
-            System.IO.StreamReader sr = new System.IO.StreamReader(@"..\..\script.sql");
-            while (!sr.EndOfStream)
-            {
-                text = text + sr.ReadLine();
-            }
-
-            com.CommandText = text;
-
-            com.ExecuteNonQuery();
-
-            conn.Dispose();
-             * */
         }
 
         public void mstReferenceClick(object sender, EventArgs e)
