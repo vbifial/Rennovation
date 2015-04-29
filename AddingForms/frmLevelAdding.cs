@@ -11,9 +11,9 @@ using Rennovation.REntities;
 
 namespace Rennovation
 {
-    public partial class frmWorkerAdding : Form
+    public partial class frmLevelAdding : Form
     {
-        public frmWorkerAdding()
+        public frmLevelAdding()
         {
             InitializeComponent();
             btnSave.Click += new EventHandler(btnSave_Click);
@@ -21,22 +21,23 @@ namespace Rennovation
         }
 
         public bool adding = true;
-        public EntWorker worker = null;
+        public EntLevel level = null;
         public bool success = false;
+        public long pworktype = 0;
 
         public void init()
         {
             if (adding)
             {
-                this.Text = "Добавление работника";
+                this.Text = "Добавление уровня";
                 txtName.Text = null;
-                txtContacts.Text = null;
+                txtValue.Text = null;
             }
             else
             {
-                this.Text = "Редактирование работника";
-                txtName.Text = worker.name;
-                txtContacts.Lines = RData.stringToLines(worker.contacts);
+                this.Text = "Редактирование уровня";
+                txtName.Text = level.name;
+                txtValue.Text = "" + level.value;
             }
             success = false;
         }
@@ -44,14 +45,23 @@ namespace Rennovation
         private void btnSave_Click(object sender, EventArgs e)
         {
             String name = txtName.Text;
-            String cont = RData.linesToString(txtContacts.Lines);
-            if (EntWorker.check(name, cont))
+            long value = 0;
+            try
+            {
+                value = long.Parse(txtValue.Text);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Значения показателя и оплаты должны быть целыми числами.\n" + exc.Message);
+                return;
+            }
+            if (EntLevel.check(name, value))
                 if (adding)
                 {
                     try
                     {
-                        worker = new EntWorker(name, cont);
-                        worker.save();
+                        level = new EntLevel(name, value, pworktype);
+                        level.save();
                         success = true;
                         this.Hide();
                     }
@@ -64,9 +74,9 @@ namespace Rennovation
                 {
                     try
                     {
-                        worker.name = name;
-                        worker.contacts = cont;
-                        worker.save();
+                        level.name = name;
+                        level.value = value;
+                        level.save();
                         success = true;
                         this.Hide();
                     }

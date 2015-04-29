@@ -54,7 +54,7 @@
             this.dgrLevels = new System.Windows.Forms.DataGridView();
             this.colLevelName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colLevelObject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colLevelLValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colLevelValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnQualEdit = new System.Windows.Forms.Button();
             this.btnLevelEdit = new System.Windows.Forms.Button();
             this.btnWorktypeEdit = new System.Windows.Forms.Button();
@@ -362,7 +362,7 @@
             this.dgrLevels.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colLevelName,
             this.colLevelObject,
-            this.colLevelLValue});
+            this.colLevelValue});
             this.dgrLevels.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dgrLevels.Location = new System.Drawing.Point(186, 38);
             this.dgrLevels.MultiSelect = false;
@@ -372,6 +372,7 @@
             this.dgrLevels.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgrLevels.Size = new System.Drawing.Size(309, 147);
             this.dgrLevels.TabIndex = 34;
+            this.dgrLevels.SelectionChanged += new System.EventHandler(this.dgrLevels_SelectionChanged);
             // 
             // colLevelName
             // 
@@ -389,10 +390,10 @@
             // 
             // colLevelLValue
             // 
-            this.colLevelLValue.HeaderText = "Показатель";
-            this.colLevelLValue.Name = "colLevelLValue";
-            this.colLevelLValue.ReadOnly = true;
-            this.colLevelLValue.Width = 70;
+            this.colLevelValue.HeaderText = "Показатель";
+            this.colLevelValue.Name = "colLevelLValue";
+            this.colLevelValue.ReadOnly = true;
+            this.colLevelValue.Width = 70;
             // 
             // btnQualEdit
             // 
@@ -412,6 +413,7 @@
             this.btnLevelEdit.TabIndex = 33;
             this.btnLevelEdit.Text = "Редактировать";
             this.btnLevelEdit.UseVisualStyleBackColor = true;
+            this.btnLevelEdit.Click += new System.EventHandler(this.btnLevelEdit_Click);
             // 
             // btnWorktypeEdit
             // 
@@ -442,6 +444,7 @@
             this.btnLevelDelete.TabIndex = 32;
             this.btnLevelDelete.Text = "Удалить";
             this.btnLevelDelete.UseVisualStyleBackColor = true;
+            this.btnLevelDelete.Click += new System.EventHandler(this.btnLevelDelete_Click);
             // 
             // btnWorktypeDelete
             // 
@@ -472,6 +475,7 @@
             this.btnLevelAdd.TabIndex = 31;
             this.btnLevelAdd.Text = "Добавить";
             this.btnLevelAdd.UseVisualStyleBackColor = true;
+            this.btnLevelAdd.Click += new System.EventHandler(this.btnLevelAdd_Click);
             // 
             // btnWorktypeAdd
             // 
@@ -678,7 +682,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colQualValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLevelName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colLevelObject;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colLevelLValue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colLevelValue;
         private System.Windows.Forms.TextBox txtWorkerInfo;
         private System.Windows.Forms.Label lblWorkerInfo;
         private System.Windows.Forms.Button btnWorkerEdit;

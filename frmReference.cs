@@ -139,34 +139,19 @@ namespace Rennovation
             btnWorktypeAdd.Enabled = true;
             bool ch = lstWorktypes.SelectedIndex != -1;
             btnWorktypeDelete.Enabled = btnWorktypeEdit.Enabled = ch;
-            if (!ch)
-            {
-                reloadLevels();
-                reloadQuals();
-            }
-
+            reloadLevels();
+            reloadQuals();
             lstWorktypes.PerformLayout();
             lstWorktypes.Refresh();
         }
 
         private void lstWorktypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int idx = lstWorktypes.SelectedIndex;
-
-            reloadLevels();
-            reloadQuals();
-            if (idx > -1)
-            {
-                // todo ////////////////////////////////////////////////////////////////////
-            }
-
             updateWorktypesLayout();
-
         }
 
         private void btnWorktypeAdd_Click(object sender, EventArgs e)
         {
-            
             frmWorktypeAdding frmNew = RData.worktypeAddingForm;
             frmNew.adding = true;
             frmNew.init();
@@ -176,7 +161,6 @@ namespace Rennovation
                 lstWorktypes.Items.Add(frmNew.worktype);
                 updateWorktypesLayout();
             }
-            
         }
 
         private void btnWorktypeDelete_Click(object sender, EventArgs e)
@@ -369,24 +353,99 @@ namespace Rennovation
 
         #endregion
 
-        #region 
+        #region код, связанный с уровнями
+
+        void addLevelToGrid(EntLevel level)
+        {
+            int rid = dgrLevels.Rows.Add();
+            dgrLevels.Rows[rid].Cells[colLevelName.Index].Value = level.name;
+            dgrLevels.Rows[rid].Cells[colLevelValue.Index].Value = level.value;
+            dgrLevels.Rows[rid].Cells[colLevelObject.Index].Value = level;
+        }
 
         void reloadLevels()
         {
-
+            dgrLevels.Rows.Clear();
+            //lstWorktypes.Items.Clear();
+            if (lstWorktypes.SelectedIndex != -1)
+            {
+                EntWorktype wtype = (EntWorktype)(lstWorktypes.SelectedItem);
+                foreach (EntLevel level in EntLevel.getWithWorktype(wtype.pworktype))
+                //foreach (EntLevel level in EntLevel.getAll())
+                    addLevelToGrid(level);
+                //foreach (EntLevel level in EntLevel.getAll())
+                //    addLevelToGrid(level);
+            }
+            updateLevelsLayout();
         }
 
         void updateLevelsLayout()
+        {
+            bool ch = lstWorktypes.SelectedIndex != -1;
+            bool gr = dgrLevels.SelectedRows.Count > 0;
+            dgrLevels.Enabled = ch;
+            btnLevelAdd.Enabled = ch;
+            btnLevelDelete.Enabled = btnLevelEdit.Enabled = ch && gr;
+        }
+
+        private void dgrLevels_SelectionChanged(object sender, EventArgs e)
+        {
+            updateLevelsLayout();
+        }
+
+        private void btnLevelAdd_Click(object sender, EventArgs e)
+        {
+            frmLevelAdding frmNew = RData.levelAddingForm;
+            frmNew.adding = true;
+            frmNew.pworktype = ((EntWorktype)(lstWorktypes.SelectedItem)).pworktype;
+            frmNew.init();
+            frmNew.ShowDialog();
+            if (frmNew.success)
+            {
+                addLevelToGrid(frmNew.level);
+                updateLevelsLayout();
+            }
+        }
+
+        private void btnLevelEdit_Click(object sender, EventArgs e)
+        {
+            frmLevelAdding frmEdit = RData.levelAddingForm;
+            frmEdit.adding = false;
+            int rid = dgrLevels.SelectedRows[0].Index;
+            frmEdit.level = (EntLevel)(dgrLevels.Rows[rid].Cells[colLevelObject.Index].Value);
+            frmEdit.init();
+            frmEdit.ShowDialog();
+            if (frmEdit.success)
+            {
+                reloadLevels();
+            }
+        }
+
+        private void btnLevelDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int rid = dgrLevels.SelectedRows[0].Index;
+                EntLevel level = (EntLevel)(dgrLevels.Rows[rid].Cells[colLevelObject.Index].Value);
+                level.delete();
+                dgrLevels.Rows.RemoveAt(rid);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Не удаётся удалить квалификацию.\n" + exc.Message);
+            }
+        }
+
+        #endregion
+
+        #region код, связанный с записями о квалификации
+
+        private void dgrSpecials_SelectionChanged(object sender, EventArgs e)
         {
 
         }
 
         #endregion
 
-
-        private void dgrSpecials_SelectionChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
