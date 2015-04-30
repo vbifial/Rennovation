@@ -51,6 +51,7 @@
             this.btnOrderEdit = new System.Windows.Forms.Button();
             this.btnOrderDelete = new System.Windows.Forms.Button();
             this.btnOrderAdd = new System.Windows.Forms.Button();
+            this.txtOrderInfo = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -103,9 +104,9 @@
             "Адрес                                                         пр Ленина 127 кв 8",
             "Предварительная стоимость                98000",
             "Ожидаемая  дата завершения              03.11.15"});
-            this.listBox2.Location = new System.Drawing.Point(195, 65);
+            this.listBox2.Location = new System.Drawing.Point(573, 65);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(508, 134);
+            this.listBox2.Size = new System.Drawing.Size(130, 134);
             this.listBox2.TabIndex = 28;
             // 
             // оПрограммеToolStripMenuItem
@@ -272,11 +273,21 @@
             this.btnOrderAdd.UseVisualStyleBackColor = true;
             this.btnOrderAdd.Click += new System.EventHandler(this.btnOrderAdd_Click);
             // 
+            // txtOrderInfo
+            // 
+            this.txtOrderInfo.Location = new System.Drawing.Point(198, 65);
+            this.txtOrderInfo.Multiline = true;
+            this.txtOrderInfo.Name = "txtOrderInfo";
+            this.txtOrderInfo.ReadOnly = true;
+            this.txtOrderInfo.Size = new System.Drawing.Size(369, 148);
+            this.txtOrderInfo.TabIndex = 42;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(715, 448);
+            this.Controls.Add(this.txtOrderInfo);
             this.Controls.Add(this.btnOrderEdit);
             this.Controls.Add(this.btnOrderDelete);
             this.Controls.Add(this.btnOrderAdd);
@@ -327,6 +338,7 @@
         private System.Windows.Forms.Button btnOrderEdit;
         private System.Windows.Forms.Button btnOrderDelete;
         private System.Windows.Forms.Button btnOrderAdd;
+        private System.Windows.Forms.TextBox txtOrderInfo;
     }
 }
 

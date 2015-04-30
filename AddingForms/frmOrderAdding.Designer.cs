@@ -28,37 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cmbQual = new System.Windows.Forms.ComboBox();
-            this.cmbWorktype = new System.Windows.Forms.ComboBox();
+            this.cmbCustomer = new System.Windows.Forms.ComboBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblQual = new System.Windows.Forms.Label();
-            this.lblWorktype = new System.Windows.Forms.Label();
+            this.lblCustomer = new System.Windows.Forms.Label();
+            this.chbFMark = new System.Windows.Forms.CheckBox();
+            this.txtObject = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.lblName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // cmbQual
+            // cmbCustomer
             // 
-            this.cmbQual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbQual.FormattingEnabled = true;
-            this.cmbQual.Location = new System.Drawing.Point(119, 39);
-            this.cmbQual.Name = "cmbQual";
-            this.cmbQual.Size = new System.Drawing.Size(303, 21);
-            this.cmbQual.TabIndex = 46;
-            // 
-            // cmbWorktype
-            // 
-            this.cmbWorktype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbWorktype.FormattingEnabled = true;
-            this.cmbWorktype.Location = new System.Drawing.Point(119, 12);
-            this.cmbWorktype.Name = "cmbWorktype";
-            this.cmbWorktype.Size = new System.Drawing.Size(303, 21);
-            this.cmbWorktype.TabIndex = 45;
+            this.cmbCustomer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbCustomer.FormattingEnabled = true;
+            this.cmbCustomer.Location = new System.Drawing.Point(119, 12);
+            this.cmbCustomer.Name = "cmbCustomer";
+            this.cmbCustomer.Size = new System.Drawing.Size(303, 21);
+            this.cmbCustomer.TabIndex = 45;
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(347, 67);
+            this.btnCancel.Location = new System.Drawing.Point(347, 292);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 42;
@@ -68,7 +62,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(266, 67);
+            this.btnSave.Location = new System.Drawing.Point(266, 292);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 41;
@@ -78,32 +72,75 @@
             // lblQual
             // 
             this.lblQual.AutoSize = true;
-            this.lblQual.Location = new System.Drawing.Point(12, 42);
+            this.lblQual.Location = new System.Drawing.Point(12, 68);
             this.lblQual.Name = "lblQual";
-            this.lblQual.Size = new System.Drawing.Size(82, 13);
+            this.lblQual.Size = new System.Drawing.Size(45, 13);
             this.lblQual.TabIndex = 44;
-            this.lblQual.Text = "Квалификация";
+            this.lblQual.Text = "Объект";
             // 
-            // lblWorktype
+            // lblCustomer
             // 
-            this.lblWorktype.AutoSize = true;
-            this.lblWorktype.Location = new System.Drawing.Point(12, 15);
-            this.lblWorktype.Name = "lblWorktype";
-            this.lblWorktype.Size = new System.Drawing.Size(43, 13);
-            this.lblWorktype.TabIndex = 43;
-            this.lblWorktype.Text = "Работа";
+            this.lblCustomer.AutoSize = true;
+            this.lblCustomer.Location = new System.Drawing.Point(12, 15);
+            this.lblCustomer.Name = "lblCustomer";
+            this.lblCustomer.Size = new System.Drawing.Size(55, 13);
+            this.lblCustomer.TabIndex = 43;
+            this.lblCustomer.Text = "Заказчик";
+            // 
+            // chbFMark
+            // 
+            this.chbFMark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chbFMark.AutoSize = true;
+            this.chbFMark.Location = new System.Drawing.Point(12, 289);
+            this.chbFMark.Name = "chbFMark";
+            this.chbFMark.Size = new System.Drawing.Size(77, 17);
+            this.chbFMark.TabIndex = 46;
+            this.chbFMark.Text = "Завершён";
+            this.chbFMark.UseVisualStyleBackColor = true;
+            // 
+            // txtObject
+            // 
+            this.txtObject.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtObject.Location = new System.Drawing.Point(119, 65);
+            this.txtObject.Multiline = true;
+            this.txtObject.Name = "txtObject";
+            this.txtObject.Size = new System.Drawing.Size(303, 221);
+            this.txtObject.TabIndex = 47;
+            // 
+            // txtName
+            // 
+            this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtName.Location = new System.Drawing.Point(119, 39);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(303, 20);
+            this.txtName.TabIndex = 48;
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(12, 42);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(57, 13);
+            this.lblName.TabIndex = 49;
+            this.lblName.Text = "Название";
             // 
             // frmOrderAdding
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 93);
-            this.Controls.Add(this.cmbQual);
-            this.Controls.Add(this.cmbWorktype);
+            this.ClientSize = new System.Drawing.Size(434, 318);
+            this.Controls.Add(this.lblName);
+            this.Controls.Add(this.txtName);
+            this.Controls.Add(this.txtObject);
+            this.Controls.Add(this.chbFMark);
+            this.Controls.Add(this.cmbCustomer);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblQual);
-            this.Controls.Add(this.lblWorktype);
+            this.Controls.Add(this.lblCustomer);
             this.Name = "frmOrderAdding";
             this.Text = "frmOrderAdding";
             this.ResumeLayout(false);
@@ -113,12 +150,15 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cmbQual;
-        private System.Windows.Forms.ComboBox cmbWorktype;
+        private System.Windows.Forms.ComboBox cmbCustomer;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label lblQual;
-        private System.Windows.Forms.Label lblWorktype;
+        private System.Windows.Forms.Label lblCustomer;
+        private System.Windows.Forms.CheckBox chbFMark;
+        private System.Windows.Forms.TextBox txtObject;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.Label lblName;
 
     }
 }

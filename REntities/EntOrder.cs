@@ -179,5 +179,16 @@ namespace Rennovation.REntities
             return list;
         }
 
+        public void update(long pcustomer, DateTime edate, DateTime bdate, DateTime cdate,
+            String name, String objectS, bool fmark, long ecost, long fcost)
+        {
+            this.pcustomer = pcustomer;
+            this.name = name;
+            this.objectS = objectS;
+            this.edate = edate;
+            this.bdate = bdate;
+            this.cdate = cdate;
+            this.fmark = fmark;
+        }
     }
 }
