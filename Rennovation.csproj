@@ -85,11 +85,24 @@
     <Compile Include="AddingForms\frmQualAdding.Designer.cs">
       <DependentUpon>frmQualAdding.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddingForms\frmSpecialAdding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddingForms\frmSpecialAdding.Designer.cs">
+      <DependentUpon>frmSpecialAdding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddingForms\frmOrderAdding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddingForms\frmOrderAdding.Designer.cs">
+      <DependentUpon>frmOrderAdding.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RData.cs" />
     <Compile Include="REntities\EntQual.cs" />
     <Compile Include="REntities\EntLevel.cs" />
+    <Compile Include="REntities\EntOrder.cs" />
     <Compile Include="REntities\EntWorker.cs" />
     <Compile Include="REntities\EntSpecial.cs" />
     <Compile Include="REntities\EntWorktype.cs" />
@@ -102,6 +115,9 @@
     </Compile>
     <EmbeddedResource Include="AddingForms\frmCustomerAdding.resx">
       <DependentUpon>frmCustomerAdding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddingForms\frmOrderAdding.resx">
+      <DependentUpon>frmOrderAdding.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddingForms\frmQualAdding.resx">
       <DependentUpon>frmQualAdding.cs</DependentUpon>
@@ -117,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddingForms\frmSpecialAdding.resx">
+      <DependentUpon>frmSpecialAdding.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -31,7 +31,7 @@
             this.tbcTabs = new System.Windows.Forms.TabControl();
             this.tabWorkers = new System.Windows.Forms.TabPage();
             this.dgrSpecials = new System.Windows.Forms.DataGridView();
-            this.colSpecialObj = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecialObject = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecialWorktype = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecialQual = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSpecialEdit = new System.Windows.Forms.Button();
@@ -130,7 +130,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dgrSpecials.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgrSpecials.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colSpecialObj,
+            this.colSpecialObject,
             this.colSpecialWorktype,
             this.colSpecialQual});
             this.dgrSpecials.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -146,11 +146,11 @@
             // 
             // colSpecialObj
             // 
-            this.colSpecialObj.HeaderText = "Column3";
-            this.colSpecialObj.Name = "colSpecialObj";
-            this.colSpecialObj.ReadOnly = true;
-            this.colSpecialObj.Visible = false;
-            this.colSpecialObj.Width = 130;
+            this.colSpecialObject.HeaderText = "Column3";
+            this.colSpecialObject.Name = "colSpecialObj";
+            this.colSpecialObject.ReadOnly = true;
+            this.colSpecialObject.Visible = false;
+            this.colSpecialObject.Width = 130;
             // 
             // colSpecialWorktype
             // 
@@ -174,6 +174,7 @@
             this.btnSpecialEdit.TabIndex = 44;
             this.btnSpecialEdit.Text = "Редактировать";
             this.btnSpecialEdit.UseVisualStyleBackColor = true;
+            this.btnSpecialEdit.Click += new System.EventHandler(this.btnSpecialEdit_Click);
             // 
             // btnSpecialDelete
             // 
@@ -183,6 +184,7 @@
             this.btnSpecialDelete.TabIndex = 43;
             this.btnSpecialDelete.Text = "Удалить";
             this.btnSpecialDelete.UseVisualStyleBackColor = true;
+            this.btnSpecialDelete.Click += new System.EventHandler(this.btnSpecialDelete_Click);
             // 
             // btnSpecialAdd
             // 
@@ -192,6 +194,7 @@
             this.btnSpecialAdd.TabIndex = 42;
             this.btnSpecialAdd.Text = "Добавить";
             this.btnSpecialAdd.UseVisualStyleBackColor = true;
+            this.btnSpecialAdd.Click += new System.EventHandler(this.btnSpecialAdd_Click);
             // 
             // lblSpecials
             // 
@@ -388,10 +391,10 @@
             this.colLevelObject.ReadOnly = true;
             this.colLevelObject.Visible = false;
             // 
-            // colLevelLValue
+            // colLevelValue
             // 
             this.colLevelValue.HeaderText = "Показатель";
-            this.colLevelValue.Name = "colLevelLValue";
+            this.colLevelValue.Name = "colLevelValue";
             this.colLevelValue.ReadOnly = true;
             this.colLevelValue.Width = 70;
             // 
@@ -695,7 +698,7 @@
         private System.Windows.Forms.Button btnSpecialDelete;
         private System.Windows.Forms.Button btnSpecialAdd;
         private System.Windows.Forms.Label lblSpecials;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialObj;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialObject;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialWorktype;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialQual;
     }

@@ -68,6 +68,7 @@ namespace Rennovation
         public static frmWorkerAdding workerAddingForm;
         public static frmQualAdding qualAddingForm;
         public static frmLevelAdding levelAddingForm;
+        public static frmSpecialAdding specialAddingForm;
 
         #endregion
 

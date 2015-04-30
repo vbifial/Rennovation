@@ -93,5 +93,17 @@ namespace Rennovation.REntities
             return list;
         }
 
+        public static EntWorktype getWorktype(long pworktype)
+        {
+            SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+            com.CommandText = "select * from worktypes where pworktype = @pworktype";
+            com.Parameters.Add(new SQLiteParameter("@pworktype", pworktype));
+            SQLiteDataReader reader = com.ExecuteReader();
+            while (reader.Read())
+            {
+                return new EntWorktype((long)reader["pworktype"], (String)reader["name"]);
+            }
+            return null;
+        }
     }
 }

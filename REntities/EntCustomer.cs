@@ -12,7 +12,7 @@ namespace Rennovation.REntities
         static List<EntCustomer> list = new List<EntCustomer>();
 
         bool saved = false;
-        long pcustomer = -1;
+        public long pcustomer = -1;
 
         public String name = "";
         public String contacts = "";

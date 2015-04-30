@@ -12,7 +12,7 @@ namespace Rennovation.REntities
         static List<EntQual> list = new List<EntQual>();
 
         bool saved = false;
-        long pqual = -1;
+        public long pqual = -1;
 
         public String name = "";
         public long lvalue = 0;
@@ -131,5 +131,23 @@ namespace Rennovation.REntities
             return list;
         }
 
+        public static EntQual getQual(long pqual)
+        {
+            SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+            com.CommandText = "select * from quals where pqual = @pqual";
+            com.Parameters.Add(new SQLiteParameter("@pqual", pqual));
+            SQLiteDataReader reader = com.ExecuteReader();
+            while (reader.Read())
+            {
+                return new EntQual((long)reader["pqual"], (String)reader["name"],
+                    (long)reader["lvalue"], (long)reader["value"], (long)reader["pworktype"]);
+            }
+            return null;
+        }
+
+        public EntWorktype getWorktype()
+        {
+            return EntWorktype.getWorktype(pworktype);
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace Rennovation.REntities
         static List<EntLevel> list = new List<EntLevel>();
 
         bool saved = false;
-        long plevel = -1;
+        public long plevel = -1;
 
         public String name = "";
         public long value = 0;

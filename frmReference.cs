@@ -26,7 +26,7 @@ namespace Rennovation
 
         private void frmReference_Shown(object sender, EventArgs e)
         {
-            tbcTabs.SelectedTab = tabWorktypes;
+            //tbcTabs.SelectedTab = tabWorkers;
             renewAll();
         }
 
@@ -212,9 +212,12 @@ namespace Rennovation
             btnWorkerDelete.Enabled = btnWorkerEdit.Enabled =
                 lstWorkers.SelectedIndex != -1;
             if (lstWorkers.SelectedIndex == -1)
+            {
                 txtWorkerInfo.Lines = null;
+            }
             lstWorkers.PerformLayout();
             lstWorkers.Refresh();
+            reloadSpecials();
         }
 
         private void lstWorkers_SelectedIndexChanged(object sender, EventArgs e)
@@ -304,7 +307,6 @@ namespace Rennovation
 
         private void dgrQuals_SelectionChanged(object sender, EventArgs e)
         {
-
             updateQualsLayout();
         }
 
@@ -440,9 +442,87 @@ namespace Rennovation
 
         #region код, связанный с записями о квалификации
 
+        void addSpecialToGrid(EntSpecial special)
+        {
+            int rid = dgrSpecials.Rows.Add();
+            EntQual q = special.getQual();
+            EntWorktype w = q.getWorktype();
+
+            dgrSpecials.Rows[rid].Cells[colSpecialObject.Index].Value = special;
+            dgrSpecials.Rows[rid].Cells[colSpecialQual.Index].Value = q;
+            dgrSpecials.Rows[rid].Cells[colSpecialWorktype.Index].Value = w;
+        }
+
+        private void reloadSpecials()
+        {
+            dgrSpecials.Rows.Clear();
+            //lstWorktypes.Items.Clear();
+            if (lstWorkers.SelectedIndex != -1)
+            {
+                EntWorker wkr = (EntWorker)(lstWorkers.SelectedItem);
+                foreach (EntSpecial special in EntSpecial.getWithWorker(wkr.pworker))
+                    addSpecialToGrid(special);
+                //foreach (EntSpecial special in EntSpecial.getAll())
+                //    addSpecialToGrid(special);
+            }
+            updateSpecialsLayout();
+        }
+
+        void updateSpecialsLayout()
+        {
+            bool ch = lstWorkers.SelectedIndex != -1;
+            bool gr = dgrSpecials.SelectedRows.Count > 0;
+            dgrSpecials.Enabled = ch;
+            btnSpecialAdd.Enabled = ch;
+            btnSpecialDelete.Enabled = btnSpecialEdit.Enabled = ch && gr;
+        }
+
         private void dgrSpecials_SelectionChanged(object sender, EventArgs e)
         {
+            updateSpecialsLayout();
+        }
 
+        private void btnSpecialAdd_Click(object sender, EventArgs e)
+        {
+            frmSpecialAdding frmNew = RData.specialAddingForm;
+            frmNew.adding = true;
+            frmNew.pworker = ((EntWorker)(lstWorkers.SelectedItem)).pworker;
+            frmNew.init();
+            frmNew.ShowDialog();
+            if (frmNew.success)
+            {
+                addSpecialToGrid(frmNew.special);
+                updateSpecialsLayout();
+            }
+        }
+
+        private void btnSpecialEdit_Click(object sender, EventArgs e)
+        {
+            frmSpecialAdding frmEdit = RData.specialAddingForm;
+            frmEdit.adding = false;
+            int rid = dgrSpecials.SelectedRows[0].Index;
+            frmEdit.special = (EntSpecial)(dgrSpecials.Rows[rid].Cells[colSpecialObject.Index].Value);
+            frmEdit.init();
+            frmEdit.ShowDialog();
+            if (frmEdit.success)
+            {
+                reloadSpecials();
+            }
+        }
+
+        private void btnSpecialDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int rid = dgrSpecials.SelectedRows[0].Index;
+                EntSpecial special = (EntSpecial)(dgrSpecials.Rows[rid].Cells[colSpecialObject.Index].Value);
+                special.delete();
+                dgrSpecials.Rows.RemoveAt(rid);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Не удаётся удалить квалификацию.\n" + exc.Message);
+            }
         }
 
         #endregion

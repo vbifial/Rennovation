@@ -12,7 +12,7 @@ namespace Rennovation.REntities
         static List<EntWorker> list = new List<EntWorker>();
 
         bool saved = false;
-        long pworker = -1;
+        public long pworker = -1;
 
         public String name = "";
         public String contacts = "";
