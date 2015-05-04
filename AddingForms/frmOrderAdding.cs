@@ -36,7 +36,15 @@ namespace Rennovation
                 txtName.Text = null;
                 txtObject.Lines = null;
                 chbFMark.Checked = false;
+                dtpCdate.Value = DateTime.Today;
+                dtpBdate.Value = DateTime.Today;
+                dtpEdate.Value = DateTime.Today;
+                chbCdate.Checked = true;
+                chbBdate.Checked = true;
+                chbEdate.Checked = true;
                 ccus = -1;
+                txtEcost.Text = "";
+                txtFcost.Text = "";
             }
             else
             {
@@ -45,6 +53,14 @@ namespace Rennovation
                 txtObject.Lines = RData.stringToLines(order.objectS);
                 chbFMark.Checked = order.fmark;
                 ccus = order.pcustomer;
+                chbCdate.Checked = order.cdate.Equals(DateTime.MinValue);
+                dtpCdate.Value = (order.cdate.Equals(DateTime.MinValue)) ? DateTime.Today : order.cdate;
+                chbBdate.Checked = order.bdate.Equals(DateTime.MinValue);
+                dtpBdate.Value = (order.bdate.Equals(DateTime.MinValue)) ? DateTime.Today : order.bdate;
+                chbEdate.Checked = order.edate.Equals(DateTime.MinValue);
+                dtpEdate.Value = (order.edate.Equals(DateTime.MinValue)) ? DateTime.Today : order.edate;
+                txtEcost.Text = "" + ((order.ecost == -1) ? "" : "" + order.ecost);
+                txtFcost.Text = "" + ((order.fcost == -1) ? "" : "" + order.fcost);
             }
             loadCustomers();
             success = false;
@@ -58,25 +74,26 @@ namespace Rennovation
                 return;
             }
             long pcustomer = ((EntCustomer)(cmbCustomer.SelectedItem)).pcustomer;
-            DateTime edate = DateTime.MinValue;
-            DateTime bdate = DateTime.MinValue;
-            DateTime cdate = DateTime.MinValue;
+            DateTime edate = chbEdate.Checked ? DateTime.MinValue : (dtpEdate.Value);
+            DateTime bdate = chbBdate.Checked ? DateTime.MinValue : (dtpBdate.Value);
+            DateTime cdate = chbCdate.Checked ? DateTime.MinValue : (dtpCdate.Value);
             String name = txtName.Text;
             String objectS = RData.linesToString(txtObject.Lines);
             bool fmark = chbFMark.Checked;
             long ecost = -1;
             long fcost = -1;
-            //try
-            //{
-            //    lvalue = long.Parse(txtLValue.Text);
-            //    value = long.Parse(txtValue.Text);
-            //}
-            //catch (Exception exc)
-            //{
-            //    MessageBox.Show("Значения показателя и оплаты должны быть целыми числами.\n" 
-            //          + exc.Message);
-            //    return;
-            //}
+            try
+            {
+                ecost = txtEcost.Text.Equals("") ? -1 : long.Parse(txtEcost.Text);
+                fcost = txtFcost.Text.Equals("") ? -1 : long.Parse(txtFcost.Text);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Значения показателя и оплаты должны быть целыми числами.\n"
+                      + exc.Message);
+                return;
+            }
+
             if (EntOrder.check(pcustomer, edate, bdate, cdate, name, 
                     objectS, fmark, ecost, fcost))
                 if (adding)
@@ -125,6 +142,21 @@ namespace Rennovation
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void chbCdate_CheckedChanged(object sender, EventArgs e)
+        {
+            dtpCdate.Enabled = !chbCdate.Checked;
+        }
+
+        private void chbBdate_CheckedChanged(object sender, EventArgs e)
+        {
+            dtpBdate.Enabled = !chbBdate.Checked;
+        }
+
+        private void chbEdate_CheckedChanged(object sender, EventArgs e)
+        {
+            dtpEdate.Enabled = !chbEdate.Checked;
         }
 
     }

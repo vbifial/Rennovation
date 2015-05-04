@@ -37,6 +37,19 @@
             this.txtObject = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
+            this.dtpCdate = new System.Windows.Forms.DateTimePicker();
+            this.chbCdate = new System.Windows.Forms.CheckBox();
+            this.lblCdate = new System.Windows.Forms.Label();
+            this.lblBdate = new System.Windows.Forms.Label();
+            this.chbBdate = new System.Windows.Forms.CheckBox();
+            this.dtpBdate = new System.Windows.Forms.DateTimePicker();
+            this.lblEdate = new System.Windows.Forms.Label();
+            this.chbEdate = new System.Windows.Forms.CheckBox();
+            this.dtpEdate = new System.Windows.Forms.DateTimePicker();
+            this.lblEcost = new System.Windows.Forms.Label();
+            this.txtEcost = new System.Windows.Forms.TextBox();
+            this.lblFcost = new System.Windows.Forms.Label();
+            this.txtFcost = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // cmbCustomer
@@ -52,7 +65,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(347, 292);
+            this.btnCancel.Location = new System.Drawing.Point(347, 331);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 42;
@@ -62,7 +75,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(266, 292);
+            this.btnSave.Location = new System.Drawing.Point(266, 331);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 41;
@@ -91,7 +104,7 @@
             // 
             this.chbFMark.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chbFMark.AutoSize = true;
-            this.chbFMark.Location = new System.Drawing.Point(12, 289);
+            this.chbFMark.Location = new System.Drawing.Point(12, 328);
             this.chbFMark.Name = "chbFMark";
             this.chbFMark.Size = new System.Drawing.Size(77, 17);
             this.chbFMark.TabIndex = 46;
@@ -106,7 +119,7 @@
             this.txtObject.Location = new System.Drawing.Point(119, 65);
             this.txtObject.Multiline = true;
             this.txtObject.Name = "txtObject";
-            this.txtObject.Size = new System.Drawing.Size(303, 221);
+            this.txtObject.Size = new System.Drawing.Size(303, 130);
             this.txtObject.TabIndex = 47;
             // 
             // txtName
@@ -127,11 +140,163 @@
             this.lblName.TabIndex = 49;
             this.lblName.Text = "Название";
             // 
+            // dtpCdate
+            // 
+            this.dtpCdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpCdate.Location = new System.Drawing.Point(119, 201);
+            this.dtpCdate.Name = "dtpCdate";
+            this.dtpCdate.Size = new System.Drawing.Size(213, 20);
+            this.dtpCdate.TabIndex = 50;
+            // 
+            // chbCdate
+            // 
+            this.chbCdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chbCdate.AutoSize = true;
+            this.chbCdate.Location = new System.Drawing.Point(338, 201);
+            this.chbCdate.Name = "chbCdate";
+            this.chbCdate.Size = new System.Drawing.Size(84, 17);
+            this.chbCdate.TabIndex = 51;
+            this.chbCdate.Text = "Не указано";
+            this.chbCdate.UseVisualStyleBackColor = true;
+            this.chbCdate.CheckedChanged += new System.EventHandler(this.chbCdate_CheckedChanged);
+            // 
+            // lblCdate
+            // 
+            this.lblCdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblCdate.AutoSize = true;
+            this.lblCdate.Location = new System.Drawing.Point(12, 202);
+            this.lblCdate.Name = "lblCdate";
+            this.lblCdate.Size = new System.Drawing.Size(101, 13);
+            this.lblCdate.TabIndex = 52;
+            this.lblCdate.Text = "Дата составления";
+            // 
+            // lblBdate
+            // 
+            this.lblBdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblBdate.AutoSize = true;
+            this.lblBdate.Location = new System.Drawing.Point(12, 228);
+            this.lblBdate.Name = "lblBdate";
+            this.lblBdate.Size = new System.Drawing.Size(71, 13);
+            this.lblBdate.TabIndex = 55;
+            this.lblBdate.Text = "Дата начала";
+            // 
+            // chbBdate
+            // 
+            this.chbBdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chbBdate.AutoSize = true;
+            this.chbBdate.Location = new System.Drawing.Point(338, 227);
+            this.chbBdate.Name = "chbBdate";
+            this.chbBdate.Size = new System.Drawing.Size(84, 17);
+            this.chbBdate.TabIndex = 54;
+            this.chbBdate.Text = "Не указано";
+            this.chbBdate.UseVisualStyleBackColor = true;
+            this.chbBdate.CheckedChanged += new System.EventHandler(this.chbBdate_CheckedChanged);
+            // 
+            // dtpBdate
+            // 
+            this.dtpBdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpBdate.Location = new System.Drawing.Point(119, 227);
+            this.dtpBdate.Name = "dtpBdate";
+            this.dtpBdate.Size = new System.Drawing.Size(213, 20);
+            this.dtpBdate.TabIndex = 53;
+            // 
+            // lblEdate
+            // 
+            this.lblEdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblEdate.AutoSize = true;
+            this.lblEdate.Location = new System.Drawing.Point(12, 254);
+            this.lblEdate.Name = "lblEdate";
+            this.lblEdate.Size = new System.Drawing.Size(89, 13);
+            this.lblEdate.TabIndex = 58;
+            this.lblEdate.Text = "Дата окончания";
+            // 
+            // chbEdate
+            // 
+            this.chbEdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chbEdate.AutoSize = true;
+            this.chbEdate.Location = new System.Drawing.Point(338, 253);
+            this.chbEdate.Name = "chbEdate";
+            this.chbEdate.Size = new System.Drawing.Size(84, 17);
+            this.chbEdate.TabIndex = 57;
+            this.chbEdate.Text = "Не указано";
+            this.chbEdate.UseVisualStyleBackColor = true;
+            this.chbEdate.CheckedChanged += new System.EventHandler(this.chbEdate_CheckedChanged);
+            // 
+            // dtpEdate
+            // 
+            this.dtpEdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dtpEdate.Location = new System.Drawing.Point(119, 253);
+            this.dtpEdate.Name = "dtpEdate";
+            this.dtpEdate.Size = new System.Drawing.Size(213, 20);
+            this.dtpEdate.TabIndex = 56;
+            // 
+            // lblEcost
+            // 
+            this.lblEcost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblEcost.AutoSize = true;
+            this.lblEcost.Location = new System.Drawing.Point(12, 282);
+            this.lblEcost.Name = "lblEcost";
+            this.lblEcost.Size = new System.Drawing.Size(119, 13);
+            this.lblEcost.TabIndex = 60;
+            this.lblEcost.Text = "Оценочная стоимость";
+            // 
+            // txtEcost
+            // 
+            this.txtEcost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtEcost.Location = new System.Drawing.Point(151, 279);
+            this.txtEcost.Name = "txtEcost";
+            this.txtEcost.Size = new System.Drawing.Size(271, 20);
+            this.txtEcost.TabIndex = 59;
+            // 
+            // lblFcost
+            // 
+            this.lblFcost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblFcost.AutoSize = true;
+            this.lblFcost.Location = new System.Drawing.Point(12, 308);
+            this.lblFcost.Name = "lblFcost";
+            this.lblFcost.Size = new System.Drawing.Size(133, 13);
+            this.lblFcost.TabIndex = 62;
+            this.lblFcost.Text = "Фактическая стоимость";
+            // 
+            // txtFcost
+            // 
+            this.txtFcost.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFcost.Location = new System.Drawing.Point(151, 305);
+            this.txtFcost.Name = "txtFcost";
+            this.txtFcost.Size = new System.Drawing.Size(271, 20);
+            this.txtFcost.TabIndex = 61;
+            // 
             // frmOrderAdding
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 318);
+            this.ClientSize = new System.Drawing.Size(434, 357);
+            this.Controls.Add(this.lblFcost);
+            this.Controls.Add(this.txtFcost);
+            this.Controls.Add(this.lblEcost);
+            this.Controls.Add(this.txtEcost);
+            this.Controls.Add(this.lblEdate);
+            this.Controls.Add(this.chbEdate);
+            this.Controls.Add(this.dtpEdate);
+            this.Controls.Add(this.lblBdate);
+            this.Controls.Add(this.chbBdate);
+            this.Controls.Add(this.dtpBdate);
+            this.Controls.Add(this.lblCdate);
+            this.Controls.Add(this.chbCdate);
+            this.Controls.Add(this.dtpCdate);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.txtObject);
@@ -141,6 +306,8 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblQual);
             this.Controls.Add(this.lblCustomer);
+            this.MaximumSize = new System.Drawing.Size(450, 1080);
+            this.MinimumSize = new System.Drawing.Size(450, 300);
             this.Name = "frmOrderAdding";
             this.Text = "frmOrderAdding";
             this.ResumeLayout(false);
@@ -159,6 +326,19 @@
         private System.Windows.Forms.TextBox txtObject;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.DateTimePicker dtpCdate;
+        private System.Windows.Forms.CheckBox chbCdate;
+        private System.Windows.Forms.Label lblCdate;
+        private System.Windows.Forms.Label lblBdate;
+        private System.Windows.Forms.CheckBox chbBdate;
+        private System.Windows.Forms.DateTimePicker dtpBdate;
+        private System.Windows.Forms.Label lblEdate;
+        private System.Windows.Forms.CheckBox chbEdate;
+        private System.Windows.Forms.DateTimePicker dtpEdate;
+        private System.Windows.Forms.Label lblEcost;
+        private System.Windows.Forms.TextBox txtEcost;
+        private System.Windows.Forms.Label lblFcost;
+        private System.Windows.Forms.TextBox txtFcost;
 
     }
 }

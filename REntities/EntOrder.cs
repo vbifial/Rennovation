@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using System.Windows.Forms;
 
 namespace Rennovation.REntities
 {
@@ -61,6 +62,8 @@ namespace Rennovation.REntities
             this.edate = edate;
             this.bdate = bdate;
             this.cdate = cdate;
+            this.ecost = ecost;
+            this.fcost = fcost;
             this.fmark = fmark;
             saved = false;
         }
@@ -141,6 +144,12 @@ namespace Rennovation.REntities
                 System.Windows.Forms.MessageBox.Show(@"Поле ""Название"" не может быть пустым.");
                 return false;
             }
+            if ((!edate.Equals(DateTime.MinValue) && !bdate.Equals(DateTime.MinValue)) && 
+                    edate.CompareTo(bdate) < 0)
+            {
+                System.Windows.Forms.MessageBox.Show(@"Дата окончания не может быть раньше даты начала.");
+                return false;
+            }
             
             //SQLiteCommand com = new SQLiteCommand(RData.getConnection());
             //com.CommandText = "select count(porder) from orders where pworker = @pworker " +
@@ -189,6 +198,8 @@ namespace Rennovation.REntities
             this.bdate = bdate;
             this.cdate = cdate;
             this.fmark = fmark;
+            this.ecost = ecost;
+            this.fcost = fcost;
         }
     }
 }

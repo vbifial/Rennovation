@@ -97,7 +97,8 @@ namespace Rennovation.REntities
             SQLiteCommand com = new SQLiteCommand(RData.getConnection());
             com.CommandText = "select * from customers";
             SQLiteDataReader reader = com.ExecuteReader();
-            while (reader.Read()) {
+            while (reader.Read()) 
+            {
                 list.Add(new EntCustomer((long)reader["pcustomer"], (String)reader["name"], 
                     (String)reader["contacts"]));
             }

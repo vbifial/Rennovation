@@ -33,7 +33,8 @@ namespace Rennovation
             renewOrders();
 
             //DateTime dt = DateTime.FromBinary(DateTime.Now.Ticks);
-            //this.Text = dt.ToLongTimeString();
+            //this.Text = "" + DateTime.FromBinary(0L).ToLongDateString();
+            //this.Text = "" + DateTime.MinValue;
             //RData.referenceForm.ShowDialog();
 
             
