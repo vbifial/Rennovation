@@ -97,9 +97,16 @@
     <Compile Include="AddingForms\frmOrderAdding.Designer.cs">
       <DependentUpon>frmOrderAdding.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddingForms\frmPointAdding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddingForms\frmPointAdding.Designer.cs">
+      <DependentUpon>frmPointAdding.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RData.cs" />
+    <Compile Include="REntities\EntPoint.cs" />
     <Compile Include="REntities\EntQual.cs" />
     <Compile Include="REntities\EntLevel.cs" />
     <Compile Include="REntities\EntOrder.cs" />
@@ -118,6 +125,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddingForms\frmOrderAdding.resx">
       <DependentUpon>frmOrderAdding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddingForms\frmPointAdding.resx">
+      <DependentUpon>frmPointAdding.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddingForms\frmQualAdding.resx">
       <DependentUpon>frmQualAdding.cs</DependentUpon>

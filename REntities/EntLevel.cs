@@ -126,5 +126,23 @@ namespace Rennovation.REntities
             return list;
         }
 
+        public static EntLevel getWithId(long plevel)
+        {
+            SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+            com.CommandText = "select * from levels where plevel = @plevel";
+            com.Parameters.Add(new SQLiteParameter("@plevel", plevel));
+            SQLiteDataReader reader = com.ExecuteReader();
+            while (reader.Read())
+            {
+                return (new EntLevel((long)reader["plevel"], (String)reader["name"],
+                    (long)reader["value"], (long)reader["pworktype"]));
+            }
+            return null;
+        }
+
+        public EntWorktype getWorktype()
+        {
+            return EntWorktype.getWorktype(pworktype);
+        }
     }
 }

@@ -26,6 +26,7 @@ namespace Rennovation
             RData.levelAddingForm = new frmLevelAdding();
             RData.specialAddingForm = new frmSpecialAdding();
             RData.orderAddingForm = new frmOrderAdding();
+            RData.pointAddingForm = new frmPointAdding();
 
             RData.checkTables();
             RData.enableForeignKeysSupport();
@@ -73,7 +74,8 @@ namespace Rennovation
                 txtOrderInfo.Lines = null;
             }
             lstOrders.PerformLayout();
-            lstOrders.Refresh();
+            //lstOrders.Refresh();
+            renewPoints();
         }
 
         private void lstOrders_SelectedIndexChanged(object sender, EventArgs e)
@@ -128,5 +130,94 @@ namespace Rennovation
         }
 
         #endregion
+
+        #region код, связанный с CRUD пунктов
+
+        private void addPointToGrid(EntPoint point)
+        {
+            int idx = dgrPoints.Rows.Add();
+            DataGridViewCellCollection c = dgrPoints.Rows[idx].Cells;
+            c[colPoint.Index].Value = point;
+            c[colAmount.Index].Value = point.amount;
+            c[colDescr.Index].Value = point.descript;
+            c[colWorktype.Index].Value = point.getLevel().getWorktype().name;
+        }
+
+        private void renewPoints()
+        {
+            dgrPoints.Rows.Clear();
+            if (lstOrders.SelectedIndex != -1)
+            {
+                EntOrder order = (EntOrder)(lstOrders.SelectedItem);
+                foreach (EntPoint point in EntPoint.getWithOrder(order.porder))
+                    addPointToGrid(point);
+            }
+            updatePointsLayout();
+        }
+
+        private void updatePointsLayout()
+        {
+            btnPointAdd.Enabled = true;
+            btnPointDelete.Enabled = btnPointEdit.Enabled =
+                dgrPoints.SelectedRows.Count != 0;
+            dgrPoints.PerformLayout();
+            dgrPoints.Refresh();
+        }
+
+
+        private void dgrPoints_SelectionChanged(object sender, EventArgs e)
+        {
+            //int sc = dgrPoints.SelectedRows.Count;
+            //if (idx > -1)
+            //    txtOrderInfo.Lines = ((EntOrder)lstOrders.Items[idx]).infoLines();
+            updatePointsLayout();
+        }
+
+        private void btnPointAdd_Click(object sender, EventArgs e)
+        {
+            frmPointAdding frmNew = RData.pointAddingForm;
+            frmNew.adding = true;
+            frmNew.porder = ((EntOrder)lstOrders.SelectedItem).porder;
+            frmNew.init();
+            frmNew.ShowDialog();
+            if (frmNew.success)
+            {
+                addPointToGrid(frmNew.point);
+                updatePointsLayout();
+            }
+        }
+
+        private void btnPointDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int idx = dgrPoints.SelectedRows[0].Index;
+                ((EntPoint)dgrPoints.SelectedRows[0].Cells[colPoint.Index].Value).delete();
+                dgrPoints.Rows.RemoveAt(idx);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Не удаётся удалить пункт.\n" + exc.Message);
+            }
+        }
+
+        private void btnPointEdit_Click(object sender, EventArgs e)
+        {
+            frmPointAdding frmEdit = RData.pointAddingForm;
+            frmEdit.adding = false;
+            frmEdit.point = ((EntPoint)dgrPoints.SelectedRows[0].Cells[colPoint.Index].Value);
+            frmEdit.porder = ((EntOrder)lstOrders.SelectedItem).porder;
+            frmEdit.init();
+            frmEdit.ShowDialog();
+            if (frmEdit.success)
+            {
+                renewPoints();
+            }
+        }
+
+        #endregion
+
+
+
     }
 }
