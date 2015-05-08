@@ -35,7 +35,10 @@ namespace Rennovation
 
             //DateTime dt = DateTime.FromBinary(DateTime.Now.Ticks);
             //this.Text = "" + DateTime.FromBinary(0L).ToLongDateString();
-            //this.Text = "" + DateTime.MinValue;
+
+            //this.Text = "" + DateTime.MinValue.Ticks + " " + 
+            //    DateTime.MinValue.AddMilliseconds(1).Ticks;
+
             //RData.referenceForm.ShowDialog();
 
             

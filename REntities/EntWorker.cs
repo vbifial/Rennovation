@@ -104,5 +104,19 @@ namespace Rennovation.REntities
             return list;
         }
 
+        public static EntWorker getWithId(long id)
+        {
+            list.Clear();
+            SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+            com.CommandText = "select * from workers where pworker = @id";
+            com.Parameters.Add(new SQLiteParameter("@id", id));
+            SQLiteDataReader reader = com.ExecuteReader();
+            while (reader.Read())
+            {
+                return (new EntWorker((long)reader["pworker"], (String)reader["name"],
+                    (String)reader["contacts"]));
+            }
+            return null;
+        }
     }
 }
