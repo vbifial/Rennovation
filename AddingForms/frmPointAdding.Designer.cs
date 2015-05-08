@@ -45,6 +45,14 @@
             this.dtpEdate = new System.Windows.Forms.DateTimePicker();
             this.txtDescr = new System.Windows.Forms.TextBox();
             this.lblDescr = new System.Windows.Forms.Label();
+            this.dgrAssigns = new System.Windows.Forms.DataGridView();
+            this.colAssign = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWorker = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAssignEdit = new System.Windows.Forms.Button();
+            this.btnAssignDelete = new System.Windows.Forms.Button();
+            this.btnAssignAdd = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgrAssigns)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbLevel
@@ -69,7 +77,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(347, 328);
+            this.btnCancel.Location = new System.Drawing.Point(347, 420);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 42;
@@ -79,7 +87,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(266, 328);
+            this.btnSave.Location = new System.Drawing.Point(266, 420);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 41;
@@ -209,11 +217,93 @@
             this.lblDescr.TabIndex = 62;
             this.lblDescr.Text = "Описание";
             // 
+            // dgrAssigns
+            // 
+            this.dgrAssigns.AllowUserToAddRows = false;
+            this.dgrAssigns.AllowUserToDeleteRows = false;
+            this.dgrAssigns.AllowUserToResizeRows = false;
+            this.dgrAssigns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgrAssigns.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colAssign,
+            this.colWorker,
+            this.colAmount});
+            this.dgrAssigns.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgrAssigns.Location = new System.Drawing.Point(12, 225);
+            this.dgrAssigns.MultiSelect = false;
+            this.dgrAssigns.Name = "dgrAssigns";
+            this.dgrAssigns.ReadOnly = true;
+            this.dgrAssigns.RowHeadersWidth = 4;
+            this.dgrAssigns.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgrAssigns.Size = new System.Drawing.Size(410, 189);
+            this.dgrAssigns.TabIndex = 64;
+            this.dgrAssigns.SelectionChanged += new System.EventHandler(this.dgrAssigns_SelectionChanged);
+            // 
+            // colAssign
+            // 
+            this.colAssign.HeaderText = "Column2";
+            this.colAssign.Name = "colAssign";
+            this.colAssign.ReadOnly = true;
+            this.colAssign.Visible = false;
+            // 
+            // colWorker
+            // 
+            this.colWorker.HeaderText = "Исполнитель";
+            this.colWorker.Name = "colWorker";
+            this.colWorker.ReadOnly = true;
+            this.colWorker.Width = 250;
+            // 
+            // colAmount
+            // 
+            this.colAmount.HeaderText = "Объем работы";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            this.colAmount.Width = 120;
+            // 
+            // btnAssignEdit
+            // 
+            this.btnAssignEdit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAssignEdit.Location = new System.Drawing.Point(119, 196);
+            this.btnAssignEdit.Name = "btnAssignEdit";
+            this.btnAssignEdit.Size = new System.Drawing.Size(101, 23);
+            this.btnAssignEdit.TabIndex = 67;
+            this.btnAssignEdit.Text = "Редактировать";
+            this.btnAssignEdit.UseVisualStyleBackColor = true;
+            this.btnAssignEdit.Click += new System.EventHandler(this.btnAssignEdit_Click);
+            // 
+            // btnAssignDelete
+            // 
+            this.btnAssignDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAssignDelete.Location = new System.Drawing.Point(226, 196);
+            this.btnAssignDelete.Name = "btnAssignDelete";
+            this.btnAssignDelete.Size = new System.Drawing.Size(101, 23);
+            this.btnAssignDelete.TabIndex = 66;
+            this.btnAssignDelete.Text = "Удалить";
+            this.btnAssignDelete.UseVisualStyleBackColor = true;
+            this.btnAssignDelete.Click += new System.EventHandler(this.btnAssignDelete_Click);
+            // 
+            // btnAssignAdd
+            // 
+            this.btnAssignAdd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAssignAdd.Location = new System.Drawing.Point(12, 196);
+            this.btnAssignAdd.Name = "btnAssignAdd";
+            this.btnAssignAdd.Size = new System.Drawing.Size(101, 23);
+            this.btnAssignAdd.TabIndex = 65;
+            this.btnAssignAdd.Text = "Добавить";
+            this.btnAssignAdd.UseVisualStyleBackColor = true;
+            this.btnAssignAdd.Click += new System.EventHandler(this.btnAssignAdd_Click);
+            // 
             // frmPointAdding
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 354);
+            this.ClientSize = new System.Drawing.Size(434, 446);
+            this.Controls.Add(this.btnAssignEdit);
+            this.Controls.Add(this.btnAssignDelete);
+            this.Controls.Add(this.btnAssignAdd);
+            this.Controls.Add(this.dgrAssigns);
             this.Controls.Add(this.txtDescr);
             this.Controls.Add(this.lblDescr);
             this.Controls.Add(this.lblEdate);
@@ -233,6 +323,7 @@
             this.Controls.Add(this.lblWorktype);
             this.Name = "frmPointAdding";
             this.Text = "frmPointAdding";
+            ((System.ComponentModel.ISupportInitialize)(this.dgrAssigns)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -257,5 +348,12 @@
         private System.Windows.Forms.DateTimePicker dtpEdate;
         private System.Windows.Forms.TextBox txtDescr;
         private System.Windows.Forms.Label lblDescr;
+        private System.Windows.Forms.DataGridView dgrAssigns;
+        private System.Windows.Forms.Button btnAssignEdit;
+        private System.Windows.Forms.Button btnAssignDelete;
+        private System.Windows.Forms.Button btnAssignAdd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAssign;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colWorker;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colAmount;
     }
 }

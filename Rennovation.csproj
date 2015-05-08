@@ -61,6 +61,12 @@
     <Compile Include="AddingForms\frmLevelAdding.Designer.cs">
       <DependentUpon>frmLevelAdding.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddingForms\frmAssignAdding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddingForms\frmAssignAdding.Designer.cs">
+      <DependentUpon>frmAssignAdding.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +128,9 @@
     <Compile Include="frmReference.Designer.cs">
       <DependentUpon>frmReference.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddingForms\frmAssignAdding.resx">
+      <DependentUpon>frmAssignAdding.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddingForms\frmCustomerAdding.resx">
       <DependentUpon>frmCustomerAdding.cs</DependentUpon>
     </EmbeddedResource>

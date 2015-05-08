@@ -15,23 +15,23 @@ namespace Rennovation.REntities
         bool saved = false;
         public long passign = -1;
 
-        public long porder;
+        public long ppoint;
         public long pworker;
 
         public long amount;
 
-        EntAssign(long id, long porder, long pworker, long amount)
+        EntAssign(long id, long ppoint, long pworker, long amount)
         {
             this.passign = id;
-            this.porder = porder;
+            this.ppoint = ppoint;
             this.pworker = pworker;
             this.amount = amount;
             saved = true;
         }
 
-        public EntAssign(long porder, long pworker, long amount)
+        public EntAssign(long ppoint, long pworker, long amount)
         {
-            this.porder = porder;
+            this.ppoint = ppoint;
             this.pworker = pworker;
             this.amount = amount;
             saved = false;
@@ -57,7 +57,7 @@ namespace Rennovation.REntities
             if (saved)
             {
                 SQLiteCommand com = new SQLiteCommand(RData.getConnection());
-                com.CommandText = "delete from assigns where passign = @id";
+                com.CommandText = "delete from assignments where passign = @id";
                 com.Parameters.Add(new SQLiteParameter("@id", this.passign));
                 com.ExecuteNonQuery();
             }
@@ -68,20 +68,20 @@ namespace Rennovation.REntities
             SQLiteCommand com = new SQLiteCommand(RData.getConnection());
             if (saved)
             {
-                com.CommandText = "update assigns set " +
-                    "porder = @porder, pworker = @pworker, " +
+                com.CommandText = "update assignments set " +
+                    "ppoint = @ppoint, pworker = @pworker, " +
                     "amount = @amount where passign = @id";
                 com.Parameters.Add(new SQLiteParameter("@id", passign));
-                com.Parameters.Add(new SQLiteParameter("@porder", porder));
+                com.Parameters.Add(new SQLiteParameter("@ppoint", ppoint));
                 com.Parameters.Add(new SQLiteParameter("@pworker", pworker));
                 com.Parameters.Add(new SQLiteParameter("@amount", amount));
                 com.ExecuteNonQuery();
             }
             else
             {
-                com.CommandText = "insert into assigns (porder, pworker, amount) " +
-                    "values (@porder, @pworker, @amount)";
-                com.Parameters.Add(new SQLiteParameter("@porder", porder));
+                com.CommandText = "insert into assignments (ppoint, pworker, amount) " +
+                    "values (@ppoint, @pworker, @amount)";
+                com.Parameters.Add(new SQLiteParameter("@ppoint", ppoint));
                 com.Parameters.Add(new SQLiteParameter("@pworker", pworker));
                 com.Parameters.Add(new SQLiteParameter("@amount", amount));
                 com.ExecuteNonQuery();
@@ -90,7 +90,7 @@ namespace Rennovation.REntities
             }
         }
 
-        public static bool check(long porder, long pworker, long amount)
+        public static bool check(long ppoint, long pworker, long amount)
         {
             //if (name.Equals(""))
             //{
@@ -105,7 +105,7 @@ namespace Rennovation.REntities
             //}
             
             //SQLiteCommand com = new SQLiteCommand(RData.getConnection());
-            //com.CommandText = "select count(passign) from assigns where pworker = @pworker " +
+            //com.CommandText = "select count(passign) from assignments where pworker = @pworker " +
             //    "and pqual = @pqual and passign <> @passign";
             //com.Parameters.Add(new SQLiteParameter("@pworker", pworker));
             //com.Parameters.Add(new SQLiteParameter("@pqual", pqual));
@@ -120,26 +120,26 @@ namespace Rennovation.REntities
         {
             list.Clear();
             SQLiteCommand com = new SQLiteCommand(RData.getConnection());
-            com.CommandText = "select * from assigns";
+            com.CommandText = "select * from assignments";
             SQLiteDataReader reader = com.ExecuteReader();
             while (reader.Read())
             {
                 long id = (long)reader["passign"];
-                long porder = (long)reader["porder"];
+                long ppoint = (long)reader["ppoint"];
                 long pworker = (long)reader["pworker"];
                 long amount = (long)reader["amount"];
 
-                list.Add(new EntAssign(id, porder, pworker, amount));
+                list.Add(new EntAssign(id, ppoint, pworker, amount));
             }
             return list;
         }
 
-        public static List<EntAssign> getWithOrder(int porder)
+        public static List<EntAssign> getWithPoint(long ppoint)
         {
             list.Clear();
             SQLiteCommand com = new SQLiteCommand(RData.getConnection());
-            com.CommandText = "select * from assigns where porder = @porder";
-            com.Parameters.Add(new SQLiteParameter("@porder", porder));
+            com.CommandText = "select * from assignments where ppoint = @ppoint";
+            com.Parameters.Add(new SQLiteParameter("@ppoint", ppoint));
             SQLiteDataReader reader = com.ExecuteReader();
             while (reader.Read())
             {
@@ -147,25 +147,25 @@ namespace Rennovation.REntities
                 long pworker = (long)reader["pworker"];
                 long amount = (long)reader["amount"];
 
-                list.Add(new EntAssign(id, porder, pworker, amount));
+                list.Add(new EntAssign(id, ppoint, pworker, amount));
             }
             return list;
         }
 
-        public static List<EntAssign> getWithWorker(int pworker)
+        public static List<EntAssign> getWithWorker(long pworker)
         {
             list.Clear();
             SQLiteCommand com = new SQLiteCommand(RData.getConnection());
-            com.CommandText = "select * from assigns where pworker = @pworker";
+            com.CommandText = "select * from assignments where pworker = @pworker";
             com.Parameters.Add(new SQLiteParameter("@pworker", pworker));
             SQLiteDataReader reader = com.ExecuteReader();
             while (reader.Read())
             {
                 long id = (long)reader["passign"];
-                long porder = (long)reader["porder"];
+                long ppoint = (long)reader["ppoint"];
                 long amount = (long)reader["amount"];
 
-                list.Add(new EntAssign(id, porder, pworker, amount));
+                list.Add(new EntAssign(id, ppoint, pworker, amount));
             }
             return list;
         }
@@ -174,23 +174,23 @@ namespace Rennovation.REntities
         {
             list.Clear();
             SQLiteCommand com = new SQLiteCommand(RData.getConnection());
-            com.CommandText = "select * from assigns where passign = @id";
+            com.CommandText = "select * from assignments where passign = @id";
             com.Parameters.Add(new SQLiteParameter("@id", id));
             SQLiteDataReader reader = com.ExecuteReader();
             while (reader.Read())
             {
-                long porder = (long)reader["porder"];
+                long ppoint = (long)reader["ppoint"];
                 long amount = (long)reader["amount"];
                 long pworker = (long)reader["pworker"];
 
-                return (new EntAssign(id, porder, pworker, amount));
+                return (new EntAssign(id, ppoint, pworker, amount));
             }
             return null;
         }
 
-        public void update(long porder, long pworker, long amount)
+        public void update(long ppoint, long pworker, long amount)
         {
-            this.porder = porder;
+            this.ppoint = ppoint;
             this.pworker = pworker;
             this.amount = amount;
         }

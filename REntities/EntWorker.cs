@@ -118,5 +118,25 @@ namespace Rennovation.REntities
             }
             return null;
         }
+
+        public static List<EntWorker> getForPoint(long ppoint)
+        {
+            list.Clear();
+            SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+            com.CommandText = "select wk.pworker pworker, wk.name name, wk.contacts contacts from " + 
+                "workers wk, specials sp, quals q, " + 
+                "points pt, levels lv where q.pworktype = lv.pworktype and " + 
+                "sp.pqual = q.pqual and wk.pworker = sp.pworker and pt.plevel = lv.plevel and " + 
+                "lv.value <= q.lvalue and pt.ppoint = @id";
+            com.Parameters.Add(new SQLiteParameter("@id", ppoint));
+            SQLiteDataReader reader = com.ExecuteReader();
+            while (reader.Read())
+            {
+                list.Add(new EntWorker((long)reader["pworker"], (String)reader["name"],
+                    (String)reader["contacts"]));
+            }
+            return list;
+        }
+
     }
 }

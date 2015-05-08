@@ -27,6 +27,7 @@ namespace Rennovation
             RData.specialAddingForm = new frmSpecialAdding();
             RData.orderAddingForm = new frmOrderAdding();
             RData.pointAddingForm = new frmPointAdding();
+            RData.assignAddingForm = new frmAssignAdding();
 
             RData.checkTables();
             RData.enableForeignKeysSupport();

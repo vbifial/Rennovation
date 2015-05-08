@@ -33,6 +33,8 @@ namespace Rennovation
         long clvl = -1;
         long cpoint = -1;
 
+        #region код, связанный с добавлением пунктов
+
         public void init()
         {
             if (adding)
@@ -47,6 +49,7 @@ namespace Rennovation
                 txtFcost.Text = "";
                 dtpEdate.Value = DateTime.Today;
                 chbEdate.Checked = true;
+                point = null;
             }
             else
             {
@@ -66,15 +69,37 @@ namespace Rennovation
                 //this.Text = "" + cwt + " " + cql + " " + csp;
             }
             loadWorktypes();
+            reloadAssigns();
             success = false;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            if (tryToSave())
+            {
+                success = true;
+                this.Hide();
+            }
+        }
+
+        private bool saved()
+        {
+            if (!adding)
+                return true;
+
+            if (tryToSave())
+                return true;
+
+            return false;
+        }
+
+        private bool tryToSave()
+        {
+
             if (cmbLevel.SelectedItem == null)
             {
                 MessageBox.Show("Не выбран требуемый уровень.");
-                return;
+                return false;
             }
             long plevel = ((EntLevel)(cmbLevel.SelectedItem)).plevel;
             String descript = txtDescr.Text;
@@ -90,9 +115,9 @@ namespace Rennovation
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Значения объема и стоимостей должны быть целыми числами. " + 
+                MessageBox.Show("Значения объема и стоимостей должны быть целыми числами. " +
                     "Если стоимость не указана, оставьте строку пустой\n" + exc.Message);
-                return;
+                return false;
             }
             if (EntPoint.check(plevel, porder, edate, descript, amount, ecost, fcost))
                 if (adding)
@@ -102,7 +127,8 @@ namespace Rennovation
                         point = new EntPoint(plevel, porder, edate, descript, amount, ecost, fcost);
                         point.save();
                         success = true;
-                        this.Hide();
+                        adding = false;
+                        return true;
                     }
                     catch (Exception exc)
                     {
@@ -116,13 +142,17 @@ namespace Rennovation
                         point.update(plevel, porder, edate, descript, amount, ecost, fcost);
                         point.save();
                         success = true;
-                        this.Hide();
+                        adding = false;
+                        return true;
                     }
                     catch (Exception exc)
                     {
                         MessageBox.Show("Error:\n" + exc.Message);
                     }
                 }
+
+
+            return false;
         }
 
         private void loadWorktypes()
@@ -167,5 +197,94 @@ namespace Rennovation
             dtpEdate.Enabled = !chbEdate.Checked;
         }
 
+        #endregion
+
+        #region код, связанный с назначениями
+
+        private void addAssignToGrid(EntAssign ass)
+        {
+            int rid = dgrAssigns.Rows.Add();
+            DataGridViewCellCollection c = dgrAssigns.Rows[rid].Cells;
+            c[colAssign.Index].Value = ass;
+            c[colAmount.Index].Value = ass.amount;
+            c[colWorker.Index].Value = ass.getWorker();
+        }
+
+        private void reloadAssigns()
+        {
+            dgrAssigns.Rows.Clear();
+            if (point != null)
+            {
+                foreach (EntAssign ass in EntAssign.getWithPoint(point.ppoint))
+                {
+                    addAssignToGrid(ass);
+                }
+            }
+            updateAssignsLayout();
+        }
+
+        private void updateAssignsLayout()
+        {
+            btnAssignAdd.Enabled = true;
+            btnAssignDelete.Enabled = btnAssignEdit.Enabled =
+                dgrAssigns.SelectedRows.Count != 0;
+            cmbLevel.Enabled = cmbWorktype.Enabled =
+                dgrAssigns.Rows.Count == 0;
+            dgrAssigns.PerformLayout();
+            dgrAssigns.Refresh();
+        }
+
+        private void dgrAssigns_SelectionChanged(object sender, EventArgs e)
+        {
+            updateAssignsLayout();
+        }
+
+        private void btnAssignAdd_Click(object sender, EventArgs e)
+        {
+            if (saved())
+            {
+                frmAssignAdding frmNew = RData.assignAddingForm;
+                frmNew.adding = true;
+                frmNew.ppoint = point.ppoint;
+                frmNew.init();
+                frmNew.ShowDialog();
+                if (frmNew.success)
+                {
+                    addAssignToGrid(frmNew.assign);
+                    updateAssignsLayout();
+                }
+            }
+        }
+
+        private void btnAssignEdit_Click(object sender, EventArgs e)
+        {
+            frmAssignAdding frmEdit = RData.assignAddingForm;
+            frmEdit.adding = false;
+            frmEdit.assign = ((EntAssign)dgrAssigns.SelectedRows[0].Cells[colAssign.Index].Value);
+            frmEdit.ppoint = point.ppoint;
+            frmEdit.init();
+            frmEdit.ShowDialog();
+            if (frmEdit.success)
+            {
+                reloadAssigns();
+            }
+        }
+
+        private void btnAssignDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int idx = dgrAssigns.SelectedRows[0].Index;
+                ((EntAssign)dgrAssigns.SelectedRows[0].Cells[colAssign.Index].Value).delete();
+                dgrAssigns.Rows.RemoveAt(idx);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Не удаётся удалить пункт.\n" + exc.Message);
+            }
+        }
+
+
+        #endregion
     }
 }
