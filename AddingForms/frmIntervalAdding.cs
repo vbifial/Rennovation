@@ -231,14 +231,14 @@ namespace Rennovation
                 (interval == null) ? -1 : interval.pinterval))
             {
                 cnt++;
-                if (inter.eetime != -1)
+                if (inter.eetime != -1 && inter.edate.Equals(dtpEdate.Value))
                 {
                     for (int i = (int)inter.estime - starthour; i < (int)inter.eetime - starthour; i++)
                     {
                         epanels[i].BackColor = colBusy;
                     }
                 }
-                if (inter.fetime != -1)
+                if (inter.fetime != -1 && inter.fdate.Equals(dtpFdate.Value))
                 {
                     for (int i = (int)inter.fstime - starthour; i < (int)inter.fetime - starthour; i++)
                     {
@@ -247,6 +247,16 @@ namespace Rennovation
                 }
             }
             //MessageBox.Show("" + cnt);
+        }
+
+        private void dtpEdate_ValueChanged(object sender, EventArgs e)
+        {
+            updatePanels();
+        }
+
+        private void dtpFdate_ValueChanged(object sender, EventArgs e)
+        {
+            updatePanels();
         }
 
         #endregion

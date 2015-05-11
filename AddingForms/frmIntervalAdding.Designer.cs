@@ -79,6 +79,7 @@
             this.dtpEdate.Name = "dtpEdate";
             this.dtpEdate.Size = new System.Drawing.Size(184, 20);
             this.dtpEdate.TabIndex = 62;
+            this.dtpEdate.ValueChanged += new System.EventHandler(this.dtpEdate_ValueChanged);
             // 
             // txtEstime
             // 
@@ -162,6 +163,7 @@
             this.dtpFdate.Name = "dtpFdate";
             this.dtpFdate.Size = new System.Drawing.Size(184, 20);
             this.dtpFdate.TabIndex = 62;
+            this.dtpFdate.ValueChanged += new System.EventHandler(this.dtpFdate_ValueChanged);
             // 
             // chbFdate
             // 
