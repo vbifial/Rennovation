@@ -71,8 +71,8 @@ namespace Rennovation
                     dtpFdate.Value = interval.fdate;
                     chbFdate.Checked = false;
                 }
-
             }
+            updatePanels();
             success = false;
         }
 
@@ -118,7 +118,8 @@ namespace Rennovation
                     exc.Message);
                 return false;
             }
-            if (EntInterval.check(passign, edate, fdate, emark, estime, eetime, fstime, fetime))
+            if (EntInterval.check(passign, edate, fdate, emark, estime, eetime, 
+                fstime, fetime, (interval == null) ? -1 : interval.pinterval))
                 if (adding)
                 {
                     try
@@ -180,6 +181,8 @@ namespace Rennovation
         int starthour = RData.startHour;
         int hours = RData.hoursCnt;
         int panelInterval = 6;
+        Color colEmpty = Color.White;
+        Color colBusy = Color.Yellow;
 
         Panel[] createPanels(GroupBox cgrb)
         {
@@ -199,7 +202,7 @@ namespace Rennovation
                 cpan.Location = new Point(panelInterval * (i + 1) + panelWidth * i, 
                     gheight - panelInterval - panelWidth);
                 cpan.Size = new Size(panelWidth, panelWidth);
-                cpan.BackColor = Color.White;
+                cpan.BackColor = colEmpty;
 
                 Label clab = new Label();
                 clab.SuspendLayout();
@@ -216,10 +219,37 @@ namespace Rennovation
             return panels;
         }
 
+        private void updatePanels()
+        {
+            for (int i = 0; i < hours; i++)
+            {
+                fpanels[i].BackColor = epanels[i].BackColor = colEmpty;
+            }
+            int cnt = 0;
+            foreach (EntInterval inter in
+                EntInterval.getWithWorker(EntAssign.getWithId(passign).pworker,
+                (interval == null) ? -1 : interval.pinterval))
+            {
+                cnt++;
+                if (inter.eetime != -1)
+                {
+                    for (int i = (int)inter.estime - starthour; i < (int)inter.eetime - starthour; i++)
+                    {
+                        epanels[i].BackColor = colBusy;
+                    }
+                }
+                if (inter.fetime != -1)
+                {
+                    for (int i = (int)inter.fstime - starthour; i < (int)inter.fetime - starthour; i++)
+                    {
+                        fpanels[i].BackColor = colBusy;
+                    }
+                }
+            }
+            //MessageBox.Show("" + cnt);
+        }
+
         #endregion
-
-
-
 
     }
 }

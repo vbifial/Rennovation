@@ -129,8 +129,46 @@ namespace Rennovation.REntities
         }
 
         public static bool check(long passign, DateTime edate, DateTime fdate,
-            bool emark, long estime, long eetime, long fstime, long fetime)
+            bool emark, long estime, long eetime, long fstime, long fetime, long id)
         {
+            if (estime != -1)
+            {
+                if (estime >= eetime)
+                {
+                    MessageBox.Show("Время окончания должно быть больше времени начала.");
+                    return false;
+                }
+                if (estime < RData.startHour || estime >= RData.startHour + RData.hoursCnt ||
+                    eetime <= RData.startHour || eetime > RData.startHour + RData.hoursCnt)
+                {
+                    MessageBox.Show("Отрезок времени должен не выходить за пределы " + 
+                        RData.startHour + "-" + (RData.startHour + RData.hoursCnt) + "часов.");
+                    return false;
+                }
+            }
+            if (fstime != -1)
+            {
+                if (fstime >= fetime)
+                {
+                    MessageBox.Show("Время окончания должно быть больше времени начала.");
+                    return false;
+                }
+                if (fstime < RData.startHour || fstime >= RData.startHour + RData.hoursCnt ||
+                    fetime <= RData.startHour || fetime > RData.startHour + RData.hoursCnt)
+                {
+                    MessageBox.Show("Отрезок времени должен не выходить за пределы " +
+                        RData.startHour + "-" + (RData.startHour + RData.hoursCnt) + " часов.");
+                    return false;
+                }
+            }
+
+            List<EntInterval> isec = EntInterval.getIntersections(EntAssign.getWithId(passign).pworker,
+                id, estime, eetime, fstime, fetime);
+            if (isec.Count != 0)
+            {
+                MessageBox.Show("Имеются пересечения с другими записями в расписании.");
+                return false;
+            }
             //if (name.Equals(""))
             //{
             //    System.Windows.Forms.MessageBox.Show(@"Поле ""Название"" не может быть пустым.");
@@ -189,6 +227,76 @@ namespace Rennovation.REntities
             while (reader.Read())
             {
                 long id = (long)reader["pinterval"];
+                long edate = (long)reader["edate"];
+                long fdate = (long)reader["fdate"];
+                long emark = (long)reader["emark"];
+                long estime = (long)reader["estime"];
+                long eetime = (long)reader["eetime"];
+                long fstime = (long)reader["fstime"];
+                long fetime = (long)reader["fetime"];
+
+                list.Add(new EntInterval(id, passign, edate, fdate, estime, eetime,
+                    fstime, fetime, emark));
+            }
+            return list;
+        }
+
+        public static List<EntInterval> getWithWorker(long pworker, long except)
+        {
+            list.Clear();
+            SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+            com.CommandText = "select i.pinterval pinterval, i.edate edate, i.emark emark, " + 
+                "i.estime estime, i.eetime eetime, i.fstime fstime, i.fetime fetime, " + 
+                "i.passign passign, i.fdate fdate from intervals i, assignments ass where " + 
+                "ass.passign = i.passign and ass.pworker = @pworker and i.pinterval <> @except";
+            com.Parameters.Add(new SQLiteParameter("@pworker", pworker));
+            com.Parameters.Add(new SQLiteParameter("@except", except));
+            SQLiteDataReader reader = com.ExecuteReader();
+            while (reader.Read())
+            {
+                long id = (long)reader["pinterval"];
+                long passign = (long)reader["passign"];
+                long edate = (long)reader["edate"];
+                long fdate = (long)reader["fdate"];
+                long emark = (long)reader["emark"];
+                long estime = (long)reader["estime"];
+                long eetime = (long)reader["eetime"];
+                long fstime = (long)reader["fstime"];
+                long fetime = (long)reader["fetime"];
+
+                list.Add(new EntInterval(id, passign, edate, fdate, estime, eetime,
+                    fstime, fetime, emark));
+            }
+            return list;
+        }
+
+        public static List<EntInterval> getIntersections(long pworker, long except, long xes, long xee,
+            long xfs, long xfe)
+        {
+            list.Clear();
+            SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+            com.CommandText = "select i.pinterval pinterval, i.edate edate, i.emark emark, " +
+                "i.estime estime, i.eetime eetime, i.fstime fstime, i.fetime fetime, " +
+                "i.passign passign, i.fdate fdate from intervals i, assignments ass where " +
+                "ass.passign = i.passign and ass.pworker = @pworker and i.pinterval <> @except and " + 
+
+                "((@xes >= i.estime and @xes < i.eetime) or (@xee > i.estime and @xee <= i.eetime) or " + 
+                "(i.estime >= @xes and i.estime < @xee) or (i.eetime > @xes and i.eetime <= @xee) or " +
+
+                "(@xfs >= i.fstime and @xfs < i.fetime) or (@xfe > i.fstime and @xfe <= i.fetime) or " +
+                "(i.fstime >= @xfs and i.fstime < @xfe) or (i.fetime > @xfs and i.fetime <= @xfe))";
+
+            com.Parameters.Add(new SQLiteParameter("@pworker", pworker));
+            com.Parameters.Add(new SQLiteParameter("@except", except));
+            com.Parameters.Add(new SQLiteParameter("@xes", xes));
+            com.Parameters.Add(new SQLiteParameter("@xee", xee));
+            com.Parameters.Add(new SQLiteParameter("@xfs", xfs));
+            com.Parameters.Add(new SQLiteParameter("@xfe", xfe));
+            SQLiteDataReader reader = com.ExecuteReader();
+            while (reader.Read())
+            {
+                long id = (long)reader["pinterval"];
+                long passign = (long)reader["passign"];
                 long edate = (long)reader["edate"];
                 long fdate = (long)reader["fdate"];
                 long emark = (long)reader["emark"];

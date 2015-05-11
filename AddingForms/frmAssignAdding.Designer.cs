@@ -169,6 +169,7 @@
             this.dgrIntervals.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgrIntervals.Size = new System.Drawing.Size(410, 189);
             this.dgrIntervals.TabIndex = 76;
+            this.dgrIntervals.SelectionChanged += new System.EventHandler(this.dgrIntervals_SelectionChanged);
             // 
             // colInterval
             // 
@@ -179,42 +180,42 @@
             // 
             // colEdate
             // 
-            this.colEdate.HeaderText = "Дата (п)";
+            this.colEdate.HeaderText = "Дата (план)";
             this.colEdate.Name = "colEdate";
             this.colEdate.ReadOnly = true;
             this.colEdate.Width = 70;
             // 
             // colEstime
             // 
-            this.colEstime.HeaderText = "Начало (п)";
+            this.colEstime.HeaderText = "Начало (план)";
             this.colEstime.Name = "colEstime";
             this.colEstime.ReadOnly = true;
             this.colEstime.Width = 50;
             // 
             // colEetime
             // 
-            this.colEetime.HeaderText = "Конец (п)";
+            this.colEetime.HeaderText = "Конец (план)";
             this.colEetime.Name = "colEetime";
             this.colEetime.ReadOnly = true;
             this.colEetime.Width = 50;
             // 
             // colFdate
             // 
-            this.colFdate.HeaderText = "Дата (ф)";
+            this.colFdate.HeaderText = "Дата (факт)";
             this.colFdate.Name = "colFdate";
             this.colFdate.ReadOnly = true;
             this.colFdate.Width = 70;
             // 
             // colFstime
             // 
-            this.colFstime.HeaderText = "Начало (ф)";
+            this.colFstime.HeaderText = "Начало (факт)";
             this.colFstime.Name = "colFstime";
             this.colFstime.ReadOnly = true;
             this.colFstime.Width = 50;
             // 
             // colFetime
             // 
-            this.colFetime.HeaderText = "Конец (ф)";
+            this.colFetime.HeaderText = "Конец (факт)";
             this.colFetime.Name = "colFetime";
             this.colFetime.ReadOnly = true;
             this.colFetime.Width = 50;

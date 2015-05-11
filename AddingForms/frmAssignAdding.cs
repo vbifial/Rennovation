@@ -166,12 +166,14 @@ namespace Rennovation
             int rid = dgrIntervals.Rows.Add();
             DataGridViewCellCollection c = dgrIntervals.Rows[rid].Cells;
             c[colInterval.Index].Value = inter;
-            c[colEdate.Index].Value = inter.edate.ToShortDateString();
-            c[colFdate.Index].Value = inter.fdate.ToShortDateString();
-            c[colEstime.Index].Value = inter.estime;
-            c[colEetime.Index].Value = inter.eetime;
-            c[colFstime.Index].Value = inter.fstime;
-            c[colFetime.Index].Value = inter.fetime;
+            bool e = !inter.edate.Equals(DateTime.MinValue);
+            bool f = !inter.fdate.Equals(DateTime.MinValue);
+            c[colEdate.Index].Value = e ? inter.edate.ToShortDateString() : "n/a";
+            c[colFdate.Index].Value = f ? inter.fdate.ToShortDateString() : "n/a";
+            c[colEstime.Index].Value = e ? "" + inter.estime : "";
+            c[colEetime.Index].Value = e ? "" + inter.eetime : "";
+            c[colFstime.Index].Value = f ? "" + inter.fstime : "";
+            c[colFetime.Index].Value = f ? "" + inter.fetime : "";
             c[colMark.Index].Value = inter.emark;
         }
 
@@ -197,6 +199,11 @@ namespace Rennovation
                 dgrIntervals.Rows.Count == 0;
             dgrIntervals.PerformLayout();
             dgrIntervals.Refresh();
+        }
+
+        private void dgrIntervals_SelectionChanged(object sender, EventArgs e)
+        {
+            updateIntervalsLayout();
         }
 
         private void btnIntervalAdd_Click(object sender, EventArgs e)
