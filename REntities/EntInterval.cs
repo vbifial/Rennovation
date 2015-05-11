@@ -163,7 +163,7 @@ namespace Rennovation.REntities
             }
 
             List<EntInterval> isec = EntInterval.getIntersections(EntAssign.getWithId(passign).pworker,
-                id, estime, eetime, fstime, fetime);
+                id, estime, eetime, fstime, fetime, edate.ToBinary(), fdate.ToBinary());
             if (isec.Count != 0)
             {
                 MessageBox.Show("Имеются пересечения с другими записями в расписании.");
@@ -271,7 +271,7 @@ namespace Rennovation.REntities
         }
 
         public static List<EntInterval> getIntersections(long pworker, long except, long xes, long xee,
-            long xfs, long xfe)
+            long xfs, long xfe, long xed, long xfd)
         {
             list.Clear();
             SQLiteCommand com = new SQLiteCommand(RData.getConnection());
@@ -280,11 +280,13 @@ namespace Rennovation.REntities
                 "i.passign passign, i.fdate fdate from intervals i, assignments ass where " +
                 "ass.passign = i.passign and ass.pworker = @pworker and i.pinterval <> @except and " + 
 
-                "((@xes >= i.estime and @xes < i.eetime) or (@xee > i.estime and @xee <= i.eetime) or " + 
-                "(i.estime >= @xes and i.estime < @xee) or (i.eetime > @xes and i.eetime <= @xee) or " +
+                "((((@xes >= i.estime and @xes < i.eetime) or (@xee > i.estime and @xee <= i.eetime) or " + 
+                "(i.estime >= @xes and i.estime < @xee) or (i.eetime > @xes and i.eetime <= @xee)) and" + 
 
-                "(@xfs >= i.fstime and @xfs < i.fetime) or (@xfe > i.fstime and @xfe <= i.fetime) or " +
-                "(i.fstime >= @xfs and i.fstime < @xfe) or (i.fetime > @xfs and i.fetime <= @xfe))";
+                "(@xed = i.edate)) or ((@xfd = i.fdate) and " + 
+
+                "((@xfs >= i.fstime and @xfs < i.fetime) or (@xfe > i.fstime and @xfe <= i.fetime) or " +
+                "(i.fstime >= @xfs and i.fstime < @xfe) or (i.fetime > @xfs and i.fetime <= @xfe))))";
 
             com.Parameters.Add(new SQLiteParameter("@pworker", pworker));
             com.Parameters.Add(new SQLiteParameter("@except", except));
@@ -292,6 +294,8 @@ namespace Rennovation.REntities
             com.Parameters.Add(new SQLiteParameter("@xee", xee));
             com.Parameters.Add(new SQLiteParameter("@xfs", xfs));
             com.Parameters.Add(new SQLiteParameter("@xfe", xfe));
+            com.Parameters.Add(new SQLiteParameter("@xed", xed));
+            com.Parameters.Add(new SQLiteParameter("@xfd", xfd));
             SQLiteDataReader reader = com.ExecuteReader();
             while (reader.Read())
             {
