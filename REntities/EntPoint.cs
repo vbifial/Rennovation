@@ -97,7 +97,7 @@ namespace Rennovation.REntities
                     "plevel = @plevel, ecost = @ecost, " +
                     "fcost = @fcost where ppoint = @id";
                 com.Parameters.Add(new SQLiteParameter("@id", ppoint));
-                com.Parameters.Add(new SQLiteParameter("@edate", edate.Ticks));
+                com.Parameters.Add(new SQLiteParameter("@edate", edate.ToBinary()));
                 com.Parameters.Add(new SQLiteParameter("@descript", descript));
                 com.Parameters.Add(new SQLiteParameter("@amount", amount));
                 com.Parameters.Add(new SQLiteParameter("@plevel", plevel));
@@ -112,7 +112,7 @@ namespace Rennovation.REntities
                     "plevel, porder, ecost, fcost) " +
                     "values (@edate, @descript, @amount, " +
                     "@plevel, @porder, @ecost, @fcost)";
-                com.Parameters.Add(new SQLiteParameter("@edate", edate.Ticks));
+                com.Parameters.Add(new SQLiteParameter("@edate", edate.ToBinary()));
                 com.Parameters.Add(new SQLiteParameter("@descript", descript));
                 com.Parameters.Add(new SQLiteParameter("@amount", amount));
                 com.Parameters.Add(new SQLiteParameter("@plevel", plevel));

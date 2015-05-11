@@ -26,6 +26,8 @@ namespace Rennovation
 
             renewOrders();
 
+            //this.Text = "" + DateTime.Today.ToLongDateString() + " " + DateTime.Today.ToLongTimeString();
+
             //RData.intervalAddingForm.Show();
 
             //DateTime dt = DateTime.FromBinary(DateTime.Now.Ticks);

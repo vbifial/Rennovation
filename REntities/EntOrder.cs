@@ -104,9 +104,9 @@ namespace Rennovation.REntities
                     "pcustomer = @pcustomer, fmark = @fmark, ecost = @ecost, " +
                     "fcost = @fcost where porder = @id";
                 com.Parameters.Add(new SQLiteParameter("@id", porder));
-                com.Parameters.Add(new SQLiteParameter("@edate", edate.Ticks));
-                com.Parameters.Add(new SQLiteParameter("@bdate", bdate.Ticks));
-                com.Parameters.Add(new SQLiteParameter("@cdate", cdate.Ticks));
+                com.Parameters.Add(new SQLiteParameter("@edate", edate.ToBinary()));
+                com.Parameters.Add(new SQLiteParameter("@bdate", bdate.ToBinary()));
+                com.Parameters.Add(new SQLiteParameter("@cdate", cdate.ToBinary()));
                 com.Parameters.Add(new SQLiteParameter("@name", name));
                 com.Parameters.Add(new SQLiteParameter("@object", objectS));
                 com.Parameters.Add(new SQLiteParameter("@pcustomer", pcustomer));
@@ -121,9 +121,9 @@ namespace Rennovation.REntities
                     "pcustomer, fmark, ecost, fcost) " +
                     "values (@edate, @bdate, @cdate, @name, @object, " +
                     "@pcustomer, @fmark, @ecost, @fcost)";
-                com.Parameters.Add(new SQLiteParameter("@edate", edate.Ticks));
-                com.Parameters.Add(new SQLiteParameter("@bdate", bdate.Ticks));
-                com.Parameters.Add(new SQLiteParameter("@cdate", cdate.Ticks));
+                com.Parameters.Add(new SQLiteParameter("@edate", edate.ToBinary()));
+                com.Parameters.Add(new SQLiteParameter("@bdate", bdate.ToBinary()));
+                com.Parameters.Add(new SQLiteParameter("@cdate", cdate.ToBinary()));
                 com.Parameters.Add(new SQLiteParameter("@name", name));
                 com.Parameters.Add(new SQLiteParameter("@object", objectS));
                 com.Parameters.Add(new SQLiteParameter("@pcustomer", pcustomer));

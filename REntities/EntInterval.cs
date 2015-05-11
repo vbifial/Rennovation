@@ -99,8 +99,8 @@ namespace Rennovation.REntities
                     "fdate = @fdate, passign = @passign, emark = @emark, estime = @estime, " +
                     "eetime = @eetime, fstime = @fstime, fetime = @fetime where pinterval = @id";
                 com.Parameters.Add(new SQLiteParameter("@id", pinterval));
-                com.Parameters.Add(new SQLiteParameter("@edate", edate.Ticks));
-                com.Parameters.Add(new SQLiteParameter("@fdate", fdate.Ticks));
+                com.Parameters.Add(new SQLiteParameter("@edate", edate.ToBinary()));
+                com.Parameters.Add(new SQLiteParameter("@fdate", fdate.ToBinary()));
                 com.Parameters.Add(new SQLiteParameter("@passign", passign));
                 com.Parameters.Add(new SQLiteParameter("@emark", (emark ? 1L : 0L)));
                 com.Parameters.Add(new SQLiteParameter("@estime", estime));
@@ -114,8 +114,8 @@ namespace Rennovation.REntities
                 com.CommandText = "insert into intervals (edate, fdate, " +
                     "passign, emark, estime, eetime, fstime, fetime) " +
                     "values (@edate, @fdate, @passign, @emark, @estime, @eetime, @fstime, @fetime)";
-                com.Parameters.Add(new SQLiteParameter("@edate", edate.Ticks));
-                com.Parameters.Add(new SQLiteParameter("@fdate", fdate.Ticks));
+                com.Parameters.Add(new SQLiteParameter("@edate", edate.ToBinary()));
+                com.Parameters.Add(new SQLiteParameter("@fdate", fdate.ToBinary()));
                 com.Parameters.Add(new SQLiteParameter("@passign", passign));
                 com.Parameters.Add(new SQLiteParameter("@emark", (emark ? 1L : 0L)));
                 com.Parameters.Add(new SQLiteParameter("@estime", estime));
