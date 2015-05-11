@@ -72,6 +72,22 @@ namespace Rennovation
         public static frmOrderAdding orderAddingForm;
         public static frmPointAdding pointAddingForm;
         public static frmAssignAdding assignAddingForm;
+        public static frmIntervalAdding intervalAddingForm;
+
+        public static void initForms()
+        {
+            RData.referenceForm = new frmReference();
+            RData.clientAddingForm = new frmCustomerAdding();
+            RData.worktypeAddingForm = new frmWorktypeAdding();
+            RData.workerAddingForm = new frmWorkerAdding();
+            RData.qualAddingForm = new frmQualAdding();
+            RData.levelAddingForm = new frmLevelAdding();
+            RData.specialAddingForm = new frmSpecialAdding();
+            RData.orderAddingForm = new frmOrderAdding();
+            RData.pointAddingForm = new frmPointAdding();
+            RData.assignAddingForm = new frmAssignAdding();
+            RData.intervalAddingForm = new frmIntervalAdding();
+        }
 
         #endregion
 
@@ -96,6 +112,9 @@ namespace Rennovation
             char[] sep = {'\n'};
             return s.Split(sep, 10000, StringSplitOptions.None);
         }
+
+        public static int hoursCnt = 12;
+        public static int startHour = 8;
 
         #endregion
     }

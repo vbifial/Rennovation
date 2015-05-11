@@ -18,21 +18,15 @@ namespace Rennovation
         {
             RData.mainForm = this;
             InitializeComponent();
-            RData.referenceForm = new frmReference();
-            RData.clientAddingForm = new frmCustomerAdding();
-            RData.worktypeAddingForm = new frmWorktypeAdding();
-            RData.workerAddingForm = new frmWorkerAdding();
-            RData.qualAddingForm = new frmQualAdding();
-            RData.levelAddingForm = new frmLevelAdding();
-            RData.specialAddingForm = new frmSpecialAdding();
-            RData.orderAddingForm = new frmOrderAdding();
-            RData.pointAddingForm = new frmPointAdding();
-            RData.assignAddingForm = new frmAssignAdding();
+
+            RData.initForms();
 
             RData.checkTables();
             RData.enableForeignKeysSupport();
 
             renewOrders();
+
+            //RData.intervalAddingForm.Show();
 
             //DateTime dt = DateTime.FromBinary(DateTime.Now.Ticks);
             //this.Text = "" + DateTime.FromBinary(0L).ToLongDateString();
@@ -161,7 +155,7 @@ namespace Rennovation
 
         private void updatePointsLayout()
         {
-            btnPointAdd.Enabled = true;
+            btnPointAdd.Enabled = lstOrders.SelectedIndex != -1;
             btnPointDelete.Enabled = btnPointEdit.Enabled =
                 dgrPoints.SelectedRows.Count != 0;
             dgrPoints.PerformLayout();

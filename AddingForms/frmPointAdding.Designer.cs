@@ -77,7 +77,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(347, 420);
+            this.btnCancel.Location = new System.Drawing.Point(347, 422);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 42;
@@ -87,7 +87,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(266, 420);
+            this.btnSave.Location = new System.Drawing.Point(266, 422);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 41;
@@ -222,6 +222,9 @@
             this.dgrAssigns.AllowUserToAddRows = false;
             this.dgrAssigns.AllowUserToDeleteRows = false;
             this.dgrAssigns.AllowUserToResizeRows = false;
+            this.dgrAssigns.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgrAssigns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgrAssigns.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colAssign,
@@ -234,7 +237,7 @@
             this.dgrAssigns.ReadOnly = true;
             this.dgrAssigns.RowHeadersWidth = 4;
             this.dgrAssigns.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgrAssigns.Size = new System.Drawing.Size(410, 189);
+            this.dgrAssigns.Size = new System.Drawing.Size(410, 191);
             this.dgrAssigns.TabIndex = 64;
             this.dgrAssigns.SelectionChanged += new System.EventHandler(this.dgrAssigns_SelectionChanged);
             // 
@@ -299,7 +302,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 446);
+            this.ClientSize = new System.Drawing.Size(434, 448);
             this.Controls.Add(this.btnAssignEdit);
             this.Controls.Add(this.btnAssignDelete);
             this.Controls.Add(this.btnAssignAdd);

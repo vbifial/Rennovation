@@ -20,6 +20,7 @@ namespace Rennovation
             btnCancel.Click += new EventHandler(btnCancel_Click);
             AcceptButton = btnSave;
             CancelButton = btnCancel;
+            //dgrIntervals.Rows.Add();
         }
 
         public bool adding = true;
@@ -42,7 +43,7 @@ namespace Rennovation
         }
 
 
-        #region код, связанный с добавлением пунктов
+        #region код, связанный с добавлением назначений
 
         public void init()
         {
@@ -62,6 +63,7 @@ namespace Rennovation
                 //this.Text = "" + cwt + " " + cql + " " + csp;
             }
             loadWorkers();
+            reloadIntervals();
             success = false;
         }
 
@@ -151,16 +153,98 @@ namespace Rennovation
             }
         }
 
-        private void cmbWorktype_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Hide();
         }
 
         #endregion
+
+        #region код, связанный с интервалами
+
+        private void addIntervalToGrid(EntInterval inter) {
+            int rid = dgrIntervals.Rows.Add();
+            DataGridViewCellCollection c = dgrIntervals.Rows[rid].Cells;
+            c[colInterval.Index].Value = inter;
+            c[colEdate.Index].Value = inter.edate.ToShortDateString();
+            c[colFdate.Index].Value = inter.fdate.ToShortDateString();
+            c[colEstime.Index].Value = inter.estime;
+            c[colEetime.Index].Value = inter.eetime;
+            c[colFstime.Index].Value = inter.fstime;
+            c[colFetime.Index].Value = inter.fetime;
+            c[colMark.Index].Value = inter.emark;
+        }
+
+        private void reloadIntervals()
+        {
+            dgrIntervals.Rows.Clear();
+            if (assign != null)
+            {
+                foreach (EntInterval inter in EntInterval.getWithAssign(assign.passign))
+                {
+                    addIntervalToGrid(inter);
+                }
+            }
+            updateIntervalsLayout();
+        }
+
+        private void updateIntervalsLayout()
+        {
+            btnIntervalAdd.Enabled = true;
+            btnIntervalDelete.Enabled = btnIntervalEdit.Enabled =
+                dgrIntervals.SelectedRows.Count != 0;
+            cmbWorker.Enabled =
+                dgrIntervals.Rows.Count == 0;
+            dgrIntervals.PerformLayout();
+            dgrIntervals.Refresh();
+        }
+
+        private void btnIntervalAdd_Click(object sender, EventArgs e)
+        {
+            if (saved())
+            {
+                frmIntervalAdding frmNew = RData.intervalAddingForm;
+                frmNew.adding = true;
+                frmNew.passign = assign.passign;
+                frmNew.init();
+                frmNew.ShowDialog();
+                if (frmNew.success)
+                {
+                    addIntervalToGrid(frmNew.interval);
+                    updateIntervalsLayout();
+                }
+            }
+        }
+
+        private void btnIntervalEdit_Click(object sender, EventArgs e)
+        {
+            frmIntervalAdding frmEdit = RData.intervalAddingForm;
+            frmEdit.adding = false;
+            frmEdit.interval = (EntInterval)(dgrIntervals.SelectedRows[0].Cells[colInterval.Index].Value);
+            frmEdit.passign = assign.passign;
+            frmEdit.init();
+            frmEdit.ShowDialog();
+            if (frmEdit.success)
+            {
+                reloadIntervals();
+            }
+        }
+
+        private void btnIntervalDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int idx = dgrIntervals.SelectedRows[0].Index;
+                ((EntInterval)dgrIntervals.SelectedRows[0].Cells[colInterval.Index].Value).delete();
+                dgrIntervals.Rows.RemoveAt(idx);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Не удаётся удалить пункт.\n" + exc.Message);
+            }
+        }
+
+        #endregion
+
     }
 }

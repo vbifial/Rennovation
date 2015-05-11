@@ -97,7 +97,7 @@ namespace Rennovation.REntities
             {
                 com.CommandText = "update intervals set edate = @edate, " +
                     "fdate = @fdate, passign = @passign, emark = @emark, estime = @estime, " +
-                    "eetime = @eetim, festime = @fstime, fetime = @fetime where pinterval = @id";
+                    "eetime = @eetime, fstime = @fstime, fetime = @fetime where pinterval = @id";
                 com.Parameters.Add(new SQLiteParameter("@id", pinterval));
                 com.Parameters.Add(new SQLiteParameter("@edate", edate.Ticks));
                 com.Parameters.Add(new SQLiteParameter("@fdate", fdate.Ticks));
@@ -105,8 +105,8 @@ namespace Rennovation.REntities
                 com.Parameters.Add(new SQLiteParameter("@emark", (emark ? 1L : 0L)));
                 com.Parameters.Add(new SQLiteParameter("@estime", estime));
                 com.Parameters.Add(new SQLiteParameter("@eetime", eetime));
-                com.Parameters.Add(new SQLiteParameter("@estime", fstime));
-                com.Parameters.Add(new SQLiteParameter("@eetime", fetime));
+                com.Parameters.Add(new SQLiteParameter("@fstime", fstime));
+                com.Parameters.Add(new SQLiteParameter("@fetime", fetime));
                 com.ExecuteNonQuery();
             }
             else
@@ -120,8 +120,8 @@ namespace Rennovation.REntities
                 com.Parameters.Add(new SQLiteParameter("@emark", (emark ? 1L : 0L)));
                 com.Parameters.Add(new SQLiteParameter("@estime", estime));
                 com.Parameters.Add(new SQLiteParameter("@eetime", eetime));
-                com.Parameters.Add(new SQLiteParameter("@estime", fstime));
-                com.Parameters.Add(new SQLiteParameter("@eetime", fetime));
+                com.Parameters.Add(new SQLiteParameter("@fstime", fstime));
+                com.Parameters.Add(new SQLiteParameter("@fetime", fetime));
                 com.ExecuteNonQuery();
                 pinterval = RData.getConnection().LastInsertRowId;
                 saved = true;
@@ -179,7 +179,7 @@ namespace Rennovation.REntities
             return list;
         }
 
-        public static List<EntInterval> getWithAssign(int passign)
+        public static List<EntInterval> getWithAssign(long passign)
         {
             list.Clear();
             SQLiteCommand com = new SQLiteCommand(RData.getConnection());

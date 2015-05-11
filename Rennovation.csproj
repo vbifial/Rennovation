@@ -67,6 +67,12 @@
     <Compile Include="AddingForms\frmAssignAdding.Designer.cs">
       <DependentUpon>frmAssignAdding.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddingForms\frmIntervalAdding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddingForms\frmIntervalAdding.Designer.cs">
+      <DependentUpon>frmIntervalAdding.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddingForms\frmLevelAdding.resx">
       <DependentUpon>frmLevelAdding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddingForms\frmIntervalAdding.resx">
+      <DependentUpon>frmIntervalAdding.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
