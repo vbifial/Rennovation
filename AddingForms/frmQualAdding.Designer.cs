@@ -128,6 +128,8 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblLValue);
             this.Controls.Add(this.lblName);
+            this.MaximumSize = new System.Drawing.Size(800, 155);
+            this.MinimumSize = new System.Drawing.Size(450, 155);
             this.Name = "frmQualAdding";
             this.Text = "frmQualAdding";
             this.ResumeLayout(false);

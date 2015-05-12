@@ -34,6 +34,10 @@
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.dgrPoints = new System.Windows.Forms.DataGridView();
+            this.colPoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colDescr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colWorktype = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblOrders = new System.Windows.Forms.Label();
@@ -45,10 +49,6 @@
             this.btnPointEdit = new System.Windows.Forms.Button();
             this.btnPointDelete = new System.Windows.Forms.Button();
             this.btnPointAdd = new System.Windows.Forms.Button();
-            this.colPoint = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colDescr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colWorktype = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgrPoints)).BeginInit();
             this.SuspendLayout();
@@ -58,12 +58,14 @@
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
             this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
+            this.оПрограммеToolStripMenuItem.Visible = false;
             // 
             // помощьToolStripMenuItem
             // 
             this.помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
             this.помощьToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.помощьToolStripMenuItem.Text = "Помощь";
+            this.помощьToolStripMenuItem.Visible = false;
             // 
             // справочникиToolStripMenuItem
             // 
@@ -77,6 +79,7 @@
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
+            this.файлToolStripMenuItem.Visible = false;
             // 
             // menuStrip1
             // 
@@ -96,6 +99,9 @@
             this.dgrPoints.AllowUserToAddRows = false;
             this.dgrPoints.AllowUserToDeleteRows = false;
             this.dgrPoints.AllowUserToResizeRows = false;
+            this.dgrPoints.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgrPoints.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgrPoints.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colPoint,
@@ -112,6 +118,34 @@
             this.dgrPoints.Size = new System.Drawing.Size(511, 198);
             this.dgrPoints.TabIndex = 26;
             this.dgrPoints.SelectionChanged += new System.EventHandler(this.dgrPoints_SelectionChanged);
+            // 
+            // colPoint
+            // 
+            this.colPoint.HeaderText = "Column2";
+            this.colPoint.Name = "colPoint";
+            this.colPoint.ReadOnly = true;
+            this.colPoint.Visible = false;
+            // 
+            // colDescr
+            // 
+            this.colDescr.HeaderText = "Описание";
+            this.colDescr.Name = "colDescr";
+            this.colDescr.ReadOnly = true;
+            this.colDescr.Width = 200;
+            // 
+            // colWorktype
+            // 
+            this.colWorktype.HeaderText = "Работа";
+            this.colWorktype.Name = "colWorktype";
+            this.colWorktype.ReadOnly = true;
+            this.colWorktype.Width = 180;
+            // 
+            // colAmount
+            // 
+            this.colAmount.HeaderText = "Объем работы";
+            this.colAmount.Name = "colAmount";
+            this.colAmount.ReadOnly = true;
+            this.colAmount.Width = 120;
             // 
             // label3
             // 
@@ -145,6 +179,8 @@
             // 
             // lstOrders
             // 
+            this.lstOrders.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lstOrders.FormattingEnabled = true;
             this.lstOrders.IntegralHeight = false;
             this.lstOrders.Items.AddRange(new object[] {
@@ -193,6 +229,8 @@
             // 
             // txtOrderInfo
             // 
+            this.txtOrderInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtOrderInfo.Location = new System.Drawing.Point(192, 51);
             this.txtOrderInfo.Multiline = true;
             this.txtOrderInfo.Name = "txtOrderInfo";
@@ -203,7 +241,7 @@
             // 
             // btnPointEdit
             // 
-            this.btnPointEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPointEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPointEdit.Location = new System.Drawing.Point(602, 413);
             this.btnPointEdit.Name = "btnPointEdit";
             this.btnPointEdit.Size = new System.Drawing.Size(101, 23);
@@ -214,7 +252,7 @@
             // 
             // btnPointDelete
             // 
-            this.btnPointDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPointDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPointDelete.Location = new System.Drawing.Point(529, 413);
             this.btnPointDelete.Name = "btnPointDelete";
             this.btnPointDelete.Size = new System.Drawing.Size(67, 23);
@@ -225,7 +263,7 @@
             // 
             // btnPointAdd
             // 
-            this.btnPointAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnPointAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPointAdd.Location = new System.Drawing.Point(529, 384);
             this.btnPointAdd.Name = "btnPointAdd";
             this.btnPointAdd.Size = new System.Drawing.Size(174, 23);
@@ -233,34 +271,6 @@
             this.btnPointAdd.Text = "Добавить";
             this.btnPointAdd.UseVisualStyleBackColor = true;
             this.btnPointAdd.Click += new System.EventHandler(this.btnPointAdd_Click);
-            // 
-            // colPoint
-            // 
-            this.colPoint.HeaderText = "Column2";
-            this.colPoint.Name = "colPoint";
-            this.colPoint.ReadOnly = true;
-            this.colPoint.Visible = false;
-            // 
-            // colDescr
-            // 
-            this.colDescr.HeaderText = "Описание";
-            this.colDescr.Name = "colDescr";
-            this.colDescr.ReadOnly = true;
-            this.colDescr.Width = 200;
-            // 
-            // colWorktype
-            // 
-            this.colWorktype.HeaderText = "Работа";
-            this.colWorktype.Name = "colWorktype";
-            this.colWorktype.ReadOnly = true;
-            this.colWorktype.Width = 180;
-            // 
-            // colAmount
-            // 
-            this.colAmount.HeaderText = "Объем работы";
-            this.colAmount.Name = "colAmount";
-            this.colAmount.ReadOnly = true;
-            this.colAmount.Width = 120;
             // 
             // frmMain
             // 
@@ -280,6 +290,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblOrders);
             this.Controls.Add(this.lstOrders);
+            this.MinimumSize = new System.Drawing.Size(731, 487);
             this.Name = "frmMain";
             this.Text = "Rennovation";
             this.menuStrip1.ResumeLayout(false);

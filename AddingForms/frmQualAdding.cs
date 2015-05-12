@@ -33,6 +33,7 @@ namespace Rennovation
                 txtName.Text = null;
                 txtLValue.Text = null;
                 txtValue.Text = null;
+                qual = null;
             }
             else
             {
@@ -49,7 +50,7 @@ namespace Rennovation
             String name = txtName.Text;
             long lvalue = 0;
             long value = 0;
-            try 
+            try
             {
                 lvalue = long.Parse(txtLValue.Text);
                 value = long.Parse(txtValue.Text);
@@ -59,7 +60,7 @@ namespace Rennovation
                 MessageBox.Show("Значения показателя и оплаты должны быть целыми числами.\n" + exc.Message);
                 return;
             }
-            if (EntQual.check(name, lvalue, value))
+            if (EntQual.check((qual == null) ? -1 : qual.pqual, name, lvalue, value))
                 if (adding)
                 {
                     try

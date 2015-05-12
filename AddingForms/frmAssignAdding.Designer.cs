@@ -69,6 +69,8 @@
             // 
             // cmbWorker
             // 
+            this.cmbWorker.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbWorker.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbWorker.FormattingEnabled = true;
             this.cmbWorker.Location = new System.Drawing.Point(124, 12);
@@ -108,8 +110,6 @@
             // 
             // btnIntervalEdit
             // 
-            this.btnIntervalEdit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnIntervalEdit.Location = new System.Drawing.Point(119, 65);
             this.btnIntervalEdit.Name = "btnIntervalEdit";
             this.btnIntervalEdit.Size = new System.Drawing.Size(101, 23);
@@ -120,8 +120,6 @@
             // 
             // btnIntervalDelete
             // 
-            this.btnIntervalDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnIntervalDelete.Location = new System.Drawing.Point(226, 65);
             this.btnIntervalDelete.Name = "btnIntervalDelete";
             this.btnIntervalDelete.Size = new System.Drawing.Size(101, 23);
@@ -132,8 +130,6 @@
             // 
             // btnIntervalAdd
             // 
-            this.btnIntervalAdd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnIntervalAdd.Location = new System.Drawing.Point(12, 65);
             this.btnIntervalAdd.Name = "btnIntervalAdd";
             this.btnIntervalAdd.Size = new System.Drawing.Size(101, 23);
@@ -244,6 +240,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblWorktype);
+            this.MinimumSize = new System.Drawing.Size(450, 352);
             this.Name = "frmAssignAdding";
             this.Text = "frmAssignAdding";
             this.Shown += new System.EventHandler(this.frmAssignAdding_Shown);

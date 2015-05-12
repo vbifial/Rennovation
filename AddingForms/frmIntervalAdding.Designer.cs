@@ -250,6 +250,8 @@
             this.Controls.Add(this.grbFact);
             this.Controls.Add(this.grbPlan);
             this.Controls.Add(this.chbMark);
+            this.MaximumSize = new System.Drawing.Size(450, 350);
+            this.MinimumSize = new System.Drawing.Size(450, 350);
             this.Name = "frmIntervalAdding";
             this.Text = "frmIntervalAdding";
             this.grbPlan.ResumeLayout(false);

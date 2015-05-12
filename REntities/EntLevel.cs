@@ -87,13 +87,43 @@ namespace Rennovation.REntities
             }
         }
 
-        public static bool check(String name, long value)
+        public static bool check(long id, String name, long value, long pworktype)
         {
             if (name.Equals(""))
             {
                 System.Windows.Forms.MessageBox.Show(@"Поле ""ФИО"" не может быть пустым.");
                 return false;
             }
+            if (value < 0)
+            {
+                System.Windows.Forms.MessageBox.Show("Значение не может быть отрицательным");
+                return false;
+            }
+            if (id != -1)
+            {
+                SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+                com.CommandText = "select qls.lvalue qval, lvs.value lval " + 
+                    "from levels lvs, points pts, assignments ass, " + 
+                    "specials sps, quals qls where lvs.plevel = @id and " + 
+                    "lvs.plevel = pts.plevel and pts.ppoint = ass.ppoint and " +
+                    "ass.pworker = sps.pworker and sps.pqual = qls.pqual and " +
+                    "qls.pworktype = lvs.pworktype";
+
+                com.Parameters.Add(new SQLiteParameter("@id", id));
+                SQLiteDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    long lval = (long)reader["lval"];
+                    long qval = (long)reader["qval"];
+                    if (qval >= lval && value > qval)
+                    {
+                        System.Windows.Forms.MessageBox.Show(
+                            "Заданные значения конфликтуют с существующим назначением.");
+                        return false;
+                    }
+                }
+            }
+
             return true;
         }
 
@@ -139,6 +169,21 @@ namespace Rennovation.REntities
             }
             return null;
         }
+
+        //public static List<EntLevel> getAllAssigned(long id)
+        //{
+        //    list.Clear();
+        //    SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+        //    com.CommandText = "select * from levels where pworktype = @pworktype";
+        //    com.Parameters.Add(new SQLiteParameter("@id", id));
+        //    SQLiteDataReader reader = com.ExecuteReader();
+        //    while (reader.Read())
+        //    {
+        //        list.Add(new EntLevel((long)reader["plevel"], (String)reader["name"],
+        //            (long)reader["value"], (long)reader["pworktype"]));
+        //    }
+        //    return list;
+        //}
 
         public EntWorktype getWorktype()
         {

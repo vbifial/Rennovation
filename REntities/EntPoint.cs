@@ -85,6 +85,21 @@ namespace Rennovation.REntities
             }
         }
 
+        public void deleteCascade()
+        {
+            if (saved)
+            {
+                foreach (EntAssign ass in EntAssign.getWithPoint(ppoint))
+                {
+                    ass.deleteCascade();
+                }
+                SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+                com.CommandText = "delete from points where ppoint = @id";
+                com.Parameters.Add(new SQLiteParameter("@id", this.ppoint));
+                com.ExecuteNonQuery();
+            }
+        }
+
         public void save()
         {
             SQLiteCommand com = new SQLiteCommand(RData.getConnection());
@@ -131,6 +146,13 @@ namespace Rennovation.REntities
             if (descript.Equals(""))
             {
                 System.Windows.Forms.MessageBox.Show(@"Поле ""Описание"" не может быть пустым.");
+                return false;
+            }
+
+            if (amount <= 0)
+            {
+                System.Windows.Forms.MessageBox.Show(
+                    @"Объем работы должен быть положительным целым числом часов.");
                 return false;
             }
 

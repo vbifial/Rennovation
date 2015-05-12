@@ -63,6 +63,21 @@ namespace Rennovation.REntities
             }
         }
 
+        public void deleteCascade()
+        {
+            if (saved)
+            {
+                foreach (EntInterval inter in EntInterval.getWithAssign(passign))
+                {
+                    inter.delete();
+                }
+                SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+                com.CommandText = "delete from assignments where passign = @id";
+                com.Parameters.Add(new SQLiteParameter("@id", this.passign));
+                com.ExecuteNonQuery();
+            }
+        }
+
         public void save()
         {
             SQLiteCommand com = new SQLiteCommand(RData.getConnection());
@@ -90,8 +105,9 @@ namespace Rennovation.REntities
             }
         }
 
-        public static bool check(long ppoint, long pworker, long amount)
+        public static bool check(long id, long ppoint, long pworker, long amount)
         {
+
             //if (name.Equals(""))
             //{
             //    System.Windows.Forms.MessageBox.Show(@"Поле ""Название"" не может быть пустым.");
@@ -103,15 +119,27 @@ namespace Rennovation.REntities
             //    System.Windows.Forms.MessageBox.Show(@"Дата окончания не может быть раньше даты начала.");
             //    return false;
             //}
-            
-            //SQLiteCommand com = new SQLiteCommand(RData.getConnection());
-            //com.CommandText = "select count(passign) from assignments where pworker = @pworker " +
-            //    "and pqual = @pqual and passign <> @passign";
-            //com.Parameters.Add(new SQLiteParameter("@pworker", pworker));
-            //com.Parameters.Add(new SQLiteParameter("@pqual", pqual));
-            //com.Parameters.Add(new SQLiteParameter("@passign", passign));
-            //long count = (long)(com.ExecuteScalar());
-            //return count == 0;
+
+
+            if (amount <= 0)
+            {
+                System.Windows.Forms.MessageBox.Show(
+                    @"Объем работы должен быть положительным целым числом часов.");
+                return false;
+            }
+
+            SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+            com.CommandText = "select count(passign) from assignments where pworker = @pworker " +
+                "and ppoint = @ppoint and passign <> @id";
+            com.Parameters.Add(new SQLiteParameter("@pworker", pworker));
+            com.Parameters.Add(new SQLiteParameter("@ppoint", ppoint));
+            com.Parameters.Add(new SQLiteParameter("@id", id));
+            long count = (long)(com.ExecuteScalar());
+            if (count > 0)
+            {
+                MessageBox.Show("Нельзя назрачить работника на один пункт заказа два раза.");
+                return false;
+            }
 
             return true;
         }

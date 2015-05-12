@@ -77,6 +77,8 @@
             // 
             // cmbWorktype
             // 
+            this.cmbWorktype.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbWorktype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbWorktype.FormattingEnabled = true;
             this.cmbWorktype.Location = new System.Drawing.Point(119, 12);
@@ -86,6 +88,8 @@
             // 
             // cmbQual
             // 
+            this.cmbQual.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbQual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbQual.FormattingEnabled = true;
             this.cmbQual.Location = new System.Drawing.Point(119, 39);
@@ -104,6 +108,8 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblQual);
             this.Controls.Add(this.lblWorktype);
+            this.MaximumSize = new System.Drawing.Size(800, 132);
+            this.MinimumSize = new System.Drawing.Size(450, 132);
             this.Name = "frmSpecialAdding";
             this.Text = "frmSpecialAdding";
             this.ResumeLayout(false);

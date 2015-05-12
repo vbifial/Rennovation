@@ -44,7 +44,7 @@ namespace Rennovation.REntities
 
         public string[] infoLines()
         {
-            return RData.stringToLines(contacts);
+            return RData.stringToLines("ФИО:\n" + name + "\nКонтактные данные:\n" + contacts);
         }
 
         public void delete()

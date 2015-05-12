@@ -32,7 +32,7 @@ namespace Rennovation
         {
             if (adding)
             {
-                this.Text = "Добавление записи";
+                this.Text = "Добавление заказа";
                 txtName.Text = null;
                 txtObject.Lines = null;
                 chbFMark.Checked = false;
@@ -48,7 +48,7 @@ namespace Rennovation
             }
             else
             {
-                this.Text = "Редактирование записи";
+                this.Text = "Редактирование заказа";
                 txtName.Text = order.name;
                 txtObject.Lines = RData.stringToLines(order.objectS);
                 chbFMark.Checked = order.fmark;

@@ -57,6 +57,8 @@
             // 
             // cmbLevel
             // 
+            this.cmbLevel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLevel.FormattingEnabled = true;
             this.cmbLevel.Location = new System.Drawing.Point(124, 39);
@@ -66,6 +68,8 @@
             // 
             // cmbWorktype
             // 
+            this.cmbWorktype.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbWorktype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbWorktype.FormattingEnabled = true;
             this.cmbWorktype.Location = new System.Drawing.Point(124, 12);
@@ -179,8 +183,7 @@
             // 
             // chbEdate
             // 
-            this.chbEdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chbEdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.chbEdate.AutoSize = true;
             this.chbEdate.Location = new System.Drawing.Point(338, 118);
             this.chbEdate.Name = "chbEdate";
@@ -264,8 +267,6 @@
             // 
             // btnAssignEdit
             // 
-            this.btnAssignEdit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAssignEdit.Location = new System.Drawing.Point(119, 196);
             this.btnAssignEdit.Name = "btnAssignEdit";
             this.btnAssignEdit.Size = new System.Drawing.Size(101, 23);
@@ -276,8 +277,6 @@
             // 
             // btnAssignDelete
             // 
-            this.btnAssignDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAssignDelete.Location = new System.Drawing.Point(226, 196);
             this.btnAssignDelete.Name = "btnAssignDelete";
             this.btnAssignDelete.Size = new System.Drawing.Size(101, 23);
@@ -288,8 +287,6 @@
             // 
             // btnAssignAdd
             // 
-            this.btnAssignAdd.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAssignAdd.Location = new System.Drawing.Point(12, 196);
             this.btnAssignAdd.Name = "btnAssignAdd";
             this.btnAssignAdd.Size = new System.Drawing.Size(101, 23);
@@ -324,6 +321,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblLevel);
             this.Controls.Add(this.lblWorktype);
+            this.MinimumSize = new System.Drawing.Size(450, 487);
             this.Name = "frmPointAdding";
             this.Text = "frmPointAdding";
             ((System.ComponentModel.ISupportInitialize)(this.dgrAssigns)).EndInit();

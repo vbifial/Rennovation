@@ -97,7 +97,7 @@
             this.lblName.TabIndex = 8;
             this.lblName.Text = "ФИО";
             // 
-            // frmClientAdding
+            // frmCustomerAdding
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -109,7 +109,8 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblContacts);
             this.Controls.Add(this.lblName);
-            this.Name = "frmClientAdding";
+            this.MinimumSize = new System.Drawing.Size(450, 250);
+            this.Name = "frmCustomerAdding";
             this.Text = "Редактирование клиента";
             this.ResumeLayout(false);
             this.PerformLayout();

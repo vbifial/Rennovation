@@ -39,7 +39,7 @@ namespace Rennovation
         {
             if (adding)
             {
-                this.Text = "Добавление записи";
+                this.Text = "Добавление пункта";
                 cwt = -1;
                 clvl = -1;
                 cpoint = -1;
@@ -53,7 +53,7 @@ namespace Rennovation
             }
             else
             {
-                this.Text = "Редактирование записи";
+                this.Text = "Редактирование пункта";
                 clevel = point.getLevel();
                 cwt = clevel.pworktype;
                 clvl = clevel.plevel;
@@ -241,7 +241,7 @@ namespace Rennovation
 
         private void btnAssignAdd_Click(object sender, EventArgs e)
         {
-            if (saved())
+            if (saved() && (dgrAssigns.Rows.Count != 0 || tryToSave()))
             {
                 frmAssignAdding frmNew = RData.assignAddingForm;
                 frmNew.adding = true;
@@ -272,15 +272,36 @@ namespace Rennovation
 
         private void btnAssignDelete_Click(object sender, EventArgs e)
         {
+            int idx = dgrAssigns.SelectedRows[0].Index;
             try
             {
-                int idx = dgrAssigns.SelectedRows[0].Index;
                 ((EntAssign)dgrAssigns.SelectedRows[0].Cells[colAssign.Index].Value).delete();
                 dgrAssigns.Rows.RemoveAt(idx);
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Не удаётся удалить пункт.\n" + exc.Message);
+                if (exc.HResult == RData.foreignCode)
+                {
+                    DialogResult res = MessageBox.Show("У назначения есть зависимые элементы. " + 
+                        "Удалить вместе с зависимостями?", "", MessageBoxButtons.YesNo);
+                    if (res == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        try
+                        {
+                            ((EntAssign)dgrAssigns.SelectedRows[0].Cells[colAssign.Index].Value)
+                                .deleteCascade();
+                            dgrAssigns.Rows.RemoveAt(idx);
+                        }
+                        catch (Exception exc2)
+                        {
+                            MessageBox.Show("Не удаётся удалить назначение.\n" +
+                                exc2.Message/* + "\n" + exc.HResult*/);
+                        }
+                    }
+                }
+                else
+                    MessageBox.Show("Не удаётся удалить назначение.\n" + 
+                        exc.Message/* + "\n" + exc.HResult*/);
             }
         }
 

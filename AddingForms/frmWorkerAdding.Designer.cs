@@ -107,6 +107,7 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblContacts);
             this.Controls.Add(this.lblName);
+            this.MinimumSize = new System.Drawing.Size(450, 250);
             this.Name = "frmWorkerAdding";
             this.Text = "frmWorkerAdding";
             this.ResumeLayout(false);

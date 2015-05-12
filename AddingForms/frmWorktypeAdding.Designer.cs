@@ -86,6 +86,8 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblName);
+            this.MaximumSize = new System.Drawing.Size(446, 116);
+            this.MinimumSize = new System.Drawing.Size(446, 116);
             this.Name = "frmWorktypeAdding";
             this.Text = "frmWorktypeAdding";
             this.ResumeLayout(false);

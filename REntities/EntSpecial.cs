@@ -49,9 +49,25 @@ namespace Rennovation.REntities
 
         public void delete()
         {
+            SQLiteCommand com;
             if (saved)
             {
-                SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+                com = new SQLiteCommand(RData.getConnection());
+                com.CommandText = "select qls.lvalue qval " +
+                    "from levels lvs, points pts, assignments ass, " +
+                    "specials sps, quals qls where sps.pspec = @id and " +
+                    "lvs.plevel = pts.plevel and pts.ppoint = ass.ppoint and " +
+                    "ass.pworker = sps.pworker and sps.pqual = qls.pqual and " +
+                    "qls.pworktype = lvs.pworktype";
+                com.Parameters.Add(new SQLiteParameter("@id", pspecial));
+                SQLiteDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    throw new Exception(
+                        "Данная запись о квалификации используется в назначении работника.");
+                }
+
+                com = new SQLiteCommand(RData.getConnection());
                 com.CommandText = "delete from specials where pspec = @id";
                 com.Parameters.Add(new SQLiteParameter("@id", this.pspecial));
                 com.ExecuteNonQuery();
@@ -84,20 +100,52 @@ namespace Rennovation.REntities
 
         public static bool check(long pspecial, long pworker, long pqual)
         {
-            SQLiteCommand com = new SQLiteCommand(RData.getConnection());
-            com.CommandText = "select count(pspec) from specials where pworker = @pworker " +
-                "and pqual = @pqual and pspec <> @pspec";
-            com.Parameters.Add(new SQLiteParameter("@pworker", pworker));
-            com.Parameters.Add(new SQLiteParameter("@pqual", pqual));
-            com.Parameters.Add(new SQLiteParameter("@pspec", pspecial));
-            long count = (long)(com.ExecuteScalar());
-            return count == 0;
-            //if (pworker != pworker)
-            //{
-            //    System.Windows.Forms.MessageBox.Show(@"Поле ""ФИО"" не может быть пустым.");
-            //    return false;
-            //}
-            //return true;
+            EntQual nqual = EntQual.getQual(pqual);
+            if (pworker != -1)
+            {
+                SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+                com.CommandText = "select count(pspec) from specials sps, quals qls " +
+                    "where sps.pworker = @pworker and qls.pworktype = @pworktype and " + 
+                    "pspec <> @pspec and qls.pqual = sps.pqual";
+                com.Parameters.Add(new SQLiteParameter("@pworker", pworker));
+                com.Parameters.Add(new SQLiteParameter("@pworktype", nqual.pworktype));
+                com.Parameters.Add(new SQLiteParameter("@pspec", pspecial));
+                long count = (long)(com.ExecuteScalar());
+                if (count > 0)
+                {
+                    System.Windows.Forms.MessageBox.Show(
+                        "У работника уже есть квалификация в этой работе.");
+                    return false;
+                }
+            }
+
+            if (pspecial != -1)
+            {
+                SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+                com.CommandText = "select qls.lvalue qval, lvs.value lval, qls.pqual oqual " +
+                    "from levels lvs, points pts, assignments ass, " +
+                    "specials sps, quals qls where sps.pspec = @id and " +
+                    "lvs.plevel = pts.plevel and pts.ppoint = ass.ppoint and " +
+                    "ass.pworker = sps.pworker and sps.pqual = qls.pqual and " + 
+                    "qls.pworktype = lvs.pworktype";
+
+                com.Parameters.Add(new SQLiteParameter("@id", pspecial));
+                SQLiteDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    long lval = (long)reader["lval"];
+                    long qval = (long)reader["qval"];
+                    long opqual = (long)reader["oqual"];
+                    EntQual oqual = EntQual.getQual(opqual);
+                    if (oqual.pworktype != nqual.pworktype || (qval >= lval && lval > nqual.lvalue))
+                    {
+                        System.Windows.Forms.MessageBox.Show(
+                            "Заданные значения конфликтуют с существующим назначением.");
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         public static List<EntSpecial> getAll()

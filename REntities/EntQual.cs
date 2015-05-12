@@ -92,12 +92,42 @@ namespace Rennovation.REntities
             }
         }
 
-        public static bool check(String name, long lvalue, long value)
+        public static bool check(long id, String name, long lvalue, long value)
         {
             if (name.Equals(""))
             {
                 System.Windows.Forms.MessageBox.Show(@"Поле ""ФИО"" не может быть пустым.");
                 return false;
+            }
+            if (lvalue < 0 || value < 0)
+            {
+                System.Windows.Forms.MessageBox.Show(
+                    @"Значения показателя и оплаты должы быть неотрицательными.");
+                return false;
+            }
+            if (id != -1)
+            {
+                SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+                com.CommandText = "select qls.lvalue qval, lvs.value lval " +
+                    "from levels lvs, points pts, assignments ass, " +
+                    "specials sps, quals qls where qls.pqual = @id and " +
+                    "lvs.plevel = pts.plevel and pts.ppoint = ass.ppoint and " +
+                    "ass.pworker = sps.pworker and sps.pqual = qls.pqual and " +
+                    "qls.pworktype = lvs.pworktype";
+
+                com.Parameters.Add(new SQLiteParameter("@id", id));
+                SQLiteDataReader reader = com.ExecuteReader();
+                while (reader.Read())
+                {
+                    long lval = (long)reader["lval"];
+                    long qval = (long)reader["qval"];
+                    if (qval >= lval && lval > lvalue)
+                    {
+                        System.Windows.Forms.MessageBox.Show(
+                            "Заданные значения конфликтуют с существующим назначением.");
+                        return false;
+                    }
+                }
             }
             return true;
         }

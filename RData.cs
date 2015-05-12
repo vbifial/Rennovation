@@ -116,6 +116,8 @@ namespace Rennovation
         public static int hoursCnt = 12;
         public static int startHour = 8;
 
+        public static int foreignCode = -2147467259;
+
         #endregion
     }
 }

@@ -70,7 +70,7 @@ namespace Rennovation.REntities
 
         public override string ToString()
         {
-            return name;
+            return name + (fmark ? " (завершен)" : "");
         }
 
         public string info()
@@ -80,13 +80,28 @@ namespace Rennovation.REntities
 
         public string[] infoLines()
         {
-            return RData.stringToLines(name + "\n" + objectS);
+            return RData.stringToLines((fmark ? "(завершен)\n" : "") + "Название:\n" + name + "\nОписание объекта:\n" + objectS + "");
         }
 
         public void delete()
         {
             if (saved)
             {
+                SQLiteCommand com = new SQLiteCommand(RData.getConnection());
+                com.CommandText = "delete from orders where porder = @id";
+                com.Parameters.Add(new SQLiteParameter("@id", this.porder));
+                com.ExecuteNonQuery();
+            }
+        }
+
+        public void deleteCascade()
+        {
+            if (saved)
+            {
+                foreach (EntPoint point in EntPoint.getWithOrder(porder))
+                {
+                    point.deleteCascade();
+                }
                 SQLiteCommand com = new SQLiteCommand(RData.getConnection());
                 com.CommandText = "delete from orders where porder = @id";
                 com.Parameters.Add(new SQLiteParameter("@id", this.porder));
@@ -150,15 +165,6 @@ namespace Rennovation.REntities
                 System.Windows.Forms.MessageBox.Show(@"Дата окончания не может быть раньше даты начала.");
                 return false;
             }
-            
-            //SQLiteCommand com = new SQLiteCommand(RData.getConnection());
-            //com.CommandText = "select count(porder) from orders where pworker = @pworker " +
-            //    "and pqual = @pqual and porder <> @porder";
-            //com.Parameters.Add(new SQLiteParameter("@pworker", pworker));
-            //com.Parameters.Add(new SQLiteParameter("@pqual", pqual));
-            //com.Parameters.Add(new SQLiteParameter("@porder", porder));
-            //long count = (long)(com.ExecuteScalar());
-            //return count == 0;
 
             return true;
         }

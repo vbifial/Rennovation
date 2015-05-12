@@ -49,14 +49,14 @@ namespace Rennovation
         {
             if (adding)
             {
-                this.Text = "Добавление записи";
+                this.Text = "Добавление назначения";
                 txtAmount.Text = "";
                 assign = null;
                 cwk = -1;
             }
             else
             {
-                this.Text = "Редактирование записи";
+                this.Text = "Редактирование назначения";
                 cworker = assign.getWorker();
                 cwk = cworker.pworker;
                 txtAmount.Text = "" + assign.amount;
@@ -106,7 +106,7 @@ namespace Rennovation
                 MessageBox.Show("Значение объема должно быть целым числом. " + exc.Message);
                 return false;
             }
-            if (EntAssign.check(ppoint, pworker, amount))
+            if (EntAssign.check((assign == null) ? -1 : assign.passign, ppoint, pworker, amount))
                 if (adding)
                 {
                     try
@@ -208,7 +208,7 @@ namespace Rennovation
 
         private void btnIntervalAdd_Click(object sender, EventArgs e)
         {
-            if (saved())
+            if (saved() && (dgrIntervals.Rows.Count != 0 || tryToSave()))
             {
                 frmIntervalAdding frmNew = RData.intervalAddingForm;
                 frmNew.adding = true;
@@ -247,7 +247,7 @@ namespace Rennovation
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Не удаётся удалить пункт.\n" + exc.Message);
+                MessageBox.Show("Не удаётся удалить запись.\n" + exc.Message + "\n" + exc.HResult);
             }
         }
 

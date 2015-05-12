@@ -32,6 +32,7 @@ namespace Rennovation
                 this.Text = "Добавление уровня";
                 txtName.Text = null;
                 txtValue.Text = null;
+                level = null;
             }
             else
             {
@@ -55,7 +56,7 @@ namespace Rennovation
                 MessageBox.Show("Значения показателя и оплаты должны быть целыми числами.\n" + exc.Message);
                 return;
             }
-            if (EntLevel.check(name, value))
+            if (EntLevel.check((level == null) ? -1 : level.plevel, name, value, pworktype))
                 if (adding)
                 {
                     try

@@ -251,7 +251,7 @@ namespace Rennovation
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Не удаётся удалить клиента.\n" + exc.Message);
+                MessageBox.Show("Не удаётся удалить работника.\n" + exc.Message);
             }
         }
 
@@ -349,7 +349,10 @@ namespace Rennovation
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Не удаётся удалить квалификацию.\n" + exc.Message);
+                if (exc.HResult == RData.foreignCode)
+                    MessageBox.Show("Не удаётся удалить квалификацию - есть зависимые записи.");
+                else
+                    MessageBox.Show("Не удаётся удалить квалификацию.\n" + exc.Message);
             }
         }
 
@@ -434,7 +437,10 @@ namespace Rennovation
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Не удаётся удалить квалификацию.\n" + exc.Message);
+                if (exc.HResult == RData.foreignCode)
+                    MessageBox.Show("Не удаётся удалить уровень - есть зависимые записи.");
+                else
+                    MessageBox.Show("Не удаётся удалить уровень.\n" + exc.Message);
             }
         }
 
@@ -444,11 +450,17 @@ namespace Rennovation
 
         void addSpecialToGrid(EntSpecial special)
         {
+            //if (special == null)
+            //{
+            //    MessageBox.Show("null!");
+            //    return;
+            //}
             int rid = dgrSpecials.Rows.Add();
             EntQual q = special.getQual();
             EntWorktype w = q.getWorktype();
 
-            dgrSpecials.Rows[rid].Cells[colSpecialObject.Index].Value = special;
+            //MessageBox.Show("" + rid + " " + special + " " + q + " " + w);
+            dgrSpecials.Rows[rid].Cells[colSpecialObj.Index].Value = special;
             dgrSpecials.Rows[rid].Cells[colSpecialQual.Index].Value = q;
             dgrSpecials.Rows[rid].Cells[colSpecialWorktype.Index].Value = w;
         }
@@ -501,7 +513,7 @@ namespace Rennovation
             frmSpecialAdding frmEdit = RData.specialAddingForm;
             frmEdit.adding = false;
             int rid = dgrSpecials.SelectedRows[0].Index;
-            frmEdit.special = (EntSpecial)(dgrSpecials.Rows[rid].Cells[colSpecialObject.Index].Value);
+            frmEdit.special = (EntSpecial)(dgrSpecials.Rows[rid].Cells[colSpecialObj.Index].Value);
             frmEdit.init();
             frmEdit.ShowDialog();
             if (frmEdit.success)
@@ -515,17 +527,22 @@ namespace Rennovation
             try
             {
                 int rid = dgrSpecials.SelectedRows[0].Index;
-                EntSpecial special = (EntSpecial)(dgrSpecials.Rows[rid].Cells[colSpecialObject.Index].Value);
+                EntSpecial special = (EntSpecial)(dgrSpecials.Rows[rid].Cells[colSpecialObj.Index].Value);
                 special.delete();
                 dgrSpecials.Rows.RemoveAt(rid);
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Не удаётся удалить квалификацию.\n" + exc.Message);
+                MessageBox.Show("Не удаётся удалить запись о квалификации.\n" + exc.Message);
             }
         }
 
         #endregion
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+        }
 
     }
 }

@@ -31,7 +31,7 @@
             this.tbcTabs = new System.Windows.Forms.TabControl();
             this.tabWorkers = new System.Windows.Forms.TabPage();
             this.dgrSpecials = new System.Windows.Forms.DataGridView();
-            this.colSpecialObject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecialObj = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecialWorktype = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colSpecialQual = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnSpecialEdit = new System.Windows.Forms.Button();
@@ -76,6 +76,7 @@
             this.lblCustomerInfo = new System.Windows.Forms.Label();
             this.lblCustomers = new System.Windows.Forms.Label();
             this.lstCustomers = new System.Windows.Forms.ListBox();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.tbcTabs.SuspendLayout();
             this.tabWorkers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgrSpecials)).BeginInit();
@@ -101,6 +102,7 @@
             // 
             // tabWorkers
             // 
+            this.tabWorkers.Controls.Add(this.btnCancel);
             this.tabWorkers.Controls.Add(this.dgrSpecials);
             this.tabWorkers.Controls.Add(this.btnSpecialEdit);
             this.tabWorkers.Controls.Add(this.btnSpecialDelete);
@@ -130,7 +132,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dgrSpecials.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgrSpecials.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colSpecialObject,
+            this.colSpecialObj,
             this.colSpecialWorktype,
             this.colSpecialQual});
             this.dgrSpecials.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -146,11 +148,11 @@
             // 
             // colSpecialObj
             // 
-            this.colSpecialObject.HeaderText = "Column3";
-            this.colSpecialObject.Name = "colSpecialObj";
-            this.colSpecialObject.ReadOnly = true;
-            this.colSpecialObject.Visible = false;
-            this.colSpecialObject.Width = 130;
+            this.colSpecialObj.HeaderText = "Column3";
+            this.colSpecialObj.Name = "colSpecialObj";
+            this.colSpecialObj.ReadOnly = true;
+            this.colSpecialObj.Visible = false;
+            this.colSpecialObj.Width = 130;
             // 
             // colSpecialWorktype
             // 
@@ -421,7 +423,7 @@
             // btnWorktypeEdit
             // 
             this.btnWorktypeEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnWorktypeEdit.Location = new System.Drawing.Point(79, 330);
+            this.btnWorktypeEdit.Location = new System.Drawing.Point(79, 476);
             this.btnWorktypeEdit.Name = "btnWorktypeEdit";
             this.btnWorktypeEdit.Size = new System.Drawing.Size(101, 23);
             this.btnWorktypeEdit.TabIndex = 33;
@@ -452,7 +454,7 @@
             // btnWorktypeDelete
             // 
             this.btnWorktypeDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnWorktypeDelete.Location = new System.Drawing.Point(6, 330);
+            this.btnWorktypeDelete.Location = new System.Drawing.Point(6, 476);
             this.btnWorktypeDelete.Name = "btnWorktypeDelete";
             this.btnWorktypeDelete.Size = new System.Drawing.Size(67, 23);
             this.btnWorktypeDelete.TabIndex = 32;
@@ -483,7 +485,7 @@
             // btnWorktypeAdd
             // 
             this.btnWorktypeAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnWorktypeAdd.Location = new System.Drawing.Point(6, 301);
+            this.btnWorktypeAdd.Location = new System.Drawing.Point(6, 447);
             this.btnWorktypeAdd.Name = "btnWorktypeAdd";
             this.btnWorktypeAdd.Size = new System.Drawing.Size(174, 23);
             this.btnWorktypeAdd.TabIndex = 31;
@@ -529,7 +531,7 @@
             this.lstWorktypes.IntegralHeight = false;
             this.lstWorktypes.Location = new System.Drawing.Point(6, 38);
             this.lstWorktypes.Name = "lstWorktypes";
-            this.lstWorktypes.Size = new System.Drawing.Size(174, 257);
+            this.lstWorktypes.Size = new System.Drawing.Size(174, 403);
             this.lstWorktypes.TabIndex = 28;
             this.lstWorktypes.SelectedIndexChanged += new System.EventHandler(this.lstWorktypes_SelectedIndexChanged);
             // 
@@ -626,10 +628,22 @@
             this.lstCustomers.TabIndex = 20;
             this.lstCustomers.SelectedIndexChanged += new System.EventHandler(this.lstCustomers_SelectedIndexChanged);
             // 
+            // btnCancel
+            // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(-100, -100);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 0;
+            this.btnCancel.Text = "btnCancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // frmReference
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(640, 411);
             this.Controls.Add(this.tbcTabs);
             this.MaximumSize = new System.Drawing.Size(656, 1080);
@@ -698,8 +712,9 @@
         private System.Windows.Forms.Button btnSpecialDelete;
         private System.Windows.Forms.Button btnSpecialAdd;
         private System.Windows.Forms.Label lblSpecials;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialObject;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialWorktype;
         private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialQual;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialObj;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

@@ -36,12 +36,12 @@
             this.lblName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // txtLValue
+            // txtValue
             // 
             this.txtValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtValue.Location = new System.Drawing.Point(119, 38);
-            this.txtValue.Name = "txtLValue";
+            this.txtValue.Name = "txtValue";
             this.txtValue.Size = new System.Drawing.Size(303, 20);
             this.txtValue.TabIndex = 32;
             // 
@@ -106,6 +106,8 @@
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.lblLValue);
             this.Controls.Add(this.lblName);
+            this.MaximumSize = new System.Drawing.Size(800, 128);
+            this.MinimumSize = new System.Drawing.Size(450, 128);
             this.Name = "frmLevelAdding";
             this.Text = "frmLevelAdding";
             this.ResumeLayout(false);

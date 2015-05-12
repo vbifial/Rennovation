@@ -41,6 +41,7 @@ namespace Rennovation
                 cwt = -1;
                 cql = -1;
                 csp = -1;
+                special = null;
             }
             else
             {

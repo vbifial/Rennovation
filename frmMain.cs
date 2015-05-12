@@ -112,7 +112,27 @@ namespace Rennovation
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Не удаётся удалить заказ.\n" + exc.Message);
+                if (exc.HResult == RData.foreignCode)
+                {
+                    DialogResult res = MessageBox.Show("У заказа есть зависимые элементы. " +
+                        "Удалить вместе с зависимостями?", "", MessageBoxButtons.YesNo);
+                    if (res == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        try
+                        {
+                            ((EntOrder)lstOrders.SelectedItem).deleteCascade();
+                            lstOrders.Items.RemoveAt(lstOrders.SelectedIndex);
+                        }
+                        catch (Exception exc2)
+                        {
+                            MessageBox.Show("Не удаётся удалить заказ.\n" +
+                                exc2.Message/* + "\n" + exc.HResult*/);
+                        }
+                    }
+                }
+                else
+                    MessageBox.Show("Не удаётся удалить заказ.\n" +
+                        exc.Message/* + "\n" + exc.HResult*/);
             }
         }
 
@@ -189,15 +209,36 @@ namespace Rennovation
 
         private void btnPointDelete_Click(object sender, EventArgs e)
         {
+            int idx = dgrPoints.SelectedRows[0].Index;
             try
             {
-                int idx = dgrPoints.SelectedRows[0].Index;
                 ((EntPoint)dgrPoints.SelectedRows[0].Cells[colPoint.Index].Value).delete();
                 dgrPoints.Rows.RemoveAt(idx);
             }
             catch (Exception exc)
             {
-                MessageBox.Show("Не удаётся удалить пункт.\n" + exc.Message);
+                if (exc.HResult == RData.foreignCode)
+                {
+                    DialogResult res = MessageBox.Show("У пункта есть зависимые элементы. " +
+                        "Удалить вместе с зависимостями?", "", MessageBoxButtons.YesNo);
+                    if (res == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        try
+                        {
+                            ((EntPoint)dgrPoints.SelectedRows[0].Cells[colPoint.Index].Value)
+                                .deleteCascade();
+                            dgrPoints.Rows.RemoveAt(idx);
+                        }
+                        catch (Exception exc2)
+                        {
+                            MessageBox.Show("Не удаётся удалить пункт.\n" +
+                                exc2.Message/* + "\n" + exc.HResult*/);
+                        }
+                    }
+                }
+                else
+                    MessageBox.Show("Не удаётся удалить пункт.\n" +
+                        exc.Message/* + "\n" + exc.HResult*/);
             }
         }
 
